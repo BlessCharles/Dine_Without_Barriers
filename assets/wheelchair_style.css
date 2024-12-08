@@ -1,0 +1,262 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: whitesmoke;
+}
+
+/* Header Section */
+.top {
+    width: 100%;
+    height: auto;
+    background: url("../assets/images/pexels-nadin-sh-78971847-29616285.jpg") no-repeat center center;
+    background-size: cover;
+    color: black;
+    text-align: center;
+    padding: 140px 0;
+}
+
+.top-section {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.top h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.top p {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    max-width: 550px;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid forestgreen;
+    border-radius: 5px 0 0 5px;
+    font-size: 1rem;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    background-color: forestgreen;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.top-section a{
+    display: inline-block;
+    background-color: forestgreen;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+
+}
+
+.top-section a:hover {
+    background-color:rgb(20, 85, 20);
+}
+
+/* Restaurants Section */
+.restaurants {
+    padding: 50px 0;
+}
+
+.restaurants h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.restaurants-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.restaurants-card {
+    background: whitesmoke;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 450px;
+}
+
+.restaurants-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.restaurants-card h2 {
+    font-size: 22px;
+    padding: 20px;
+}
+
+.restaurants-card p {
+    font-size: 18px;
+    padding: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.button {
+    flex: 1;
+    margin: 0 5px;
+    text-align: center;
+    background: #e4e2dd;
+    color: black;
+    padding: 15px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #6e695c;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-content h2 {
+    margin: 15px 0;
+    font-size: 24px;
+}
+
+.modal-content p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+}
+
+.rating-container {
+    text-align: center;
+}
+
+.rating {
+    color: gold;
+    font-size: 24px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.rating span {
+    margin-right: 2px;
+    
+}
+
+/* Rating Modal */
+#rateModal .rating-container {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin: 20px 0;
+    
+}
+
+#rateModal .star {
+    font-size: 30px;
+    color: gold;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+#rateModal .star.filled {
+    color: orange;
+}
+
+/* Buttons for the modal */
+#rateModal .button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#rateModal .button {
+    width: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #6e695c;
+    color: white;
+}
+
+#rateModal .button:hover {
+    background: #5a5345;
+}

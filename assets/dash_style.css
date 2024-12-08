@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* General styling for the body content */
+body {
+    min-height: 100vh;
+    background: #f9f9f9;
+}
+
+a{
+    text-decoration:none;
+}
+
+li {
+    list-style: none;
+}
+
+/*The code to style the side bar where the navigation links to the other web pages can be found*/
+.side-bar {
+    position: fixed;
+    background: burlywood;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-bar p {
+    font-size: 16px;
+}
+
+.side-bar .brand-name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-bar li {
+    font-size: 24px;
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+}
+
+.side-bar li:hover {
+    background: whitesmoke;
+    color: black;
+}
+
+/* Style the anchor tags within the li (user and recipe management) */
+.side-bar li a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.side-bar li a:hover {
+    background: whitesmoke;
+    color: black;
+}
+
+/* Icon styling for both li and a tags */
+.side-bar img {
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    object-fit: cover;
+}
+
+/*The code for styling all the components in the container class*/
+.container {
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    height: 100vh;
+    background: whitesmoke;
+}
+
+/*The code for styling the top section or header of the page where the search box, submit button and notification icon can be found*/
+.container .top-section {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 10vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    box-shadow:0 5px 8px burlywood;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+/*The code for styling the top section and to ensure that there is space between the search box and the notification button*/
+.container .top-section .navigation {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+}
+
+.branding .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.branding .name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Notification icon */
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.notification img {
+    width: 30px;
+    height: auto;
+    object-fit: cover;
+}
+
+.container .content{
+    position:relative;
+    margin-top:10vh;
+    min-height:90vh;
+    background:whitesmoke;
+}
+
+/*The styling for the content on the cards*/
+.container .content .cards{
+    padding:20px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.container .content .cards .card{
+    width:250px;
+    height:150px;
+    background:white;
+    margin:20px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    box-shadow:0 5px 8px burlywood;
+}
+
+.icon img{
+    width:100%;
+    max-width:50px;
+    height: auto;
+    object-fit:cover;
+
+}

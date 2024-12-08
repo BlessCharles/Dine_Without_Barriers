@@ -1,0 +1,271 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:arial;
+}
+
+/*The code for styling the body of the page*/
+body{
+    width:100%;
+    min-height:100vh;
+    background:whitesmoke;
+
+}
+
+a{
+    text-decoration:none;
+}
+
+li {
+    list-style: none;
+}
+
+/*The code for styling the side bar where the navigation to the dashboard, user and recipe management appear*/
+.side-bar {
+    position: fixed;
+    background: burlywood;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+}
+
+.side-bar p {
+    font-size: 16px;
+}
+
+.side-bar .brand-name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-bar li {
+    font-size: 24px;
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+}
+
+.side-bar li:hover {
+    background: whitesmoke;
+    color: black;
+}
+
+/* Style the anchor tags within the li (user and recipe management) */
+.side-bar li a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+/*The code to apply hover effects to the side bar*/
+.side-bar li a:hover {
+    background: whitesmoke;
+    color: black;
+}
+
+/* The code for icon styling for both li and a tags */
+.side-bar img {
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    object-fit: cover;
+}
+
+
+/*The code for the top section where the user management text appears and the background design*/
+.top {
+    width: 80vw;
+    margin-left: 20vw;
+    height: auto;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: black;
+    text-align: center;
+    padding: 140px 0;
+    box-shadow: 0 5px 8px burlywood;
+    
+}
+
+.top-section {
+    background-color: burlywood;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.top h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+
+.table-section {
+    margin-left: 20vw;
+    width: 80vw;
+    padding: 20px;
+}
+
+/*The code for styling the table on the page*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow:0 5px 8px burlywood;
+    padding:10px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color:rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/*The code for styling the buttons within the table*/
+table a.btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: forestgreen;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/*The code for creating hover effects for the buttons in the table*/
+table a.btn:hover {
+    background-color: darkgreen;
+}
+
+/*The code for styling the pop up menu that appears when the buttons in the table are clicked*/
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+/*The code for styling the content in the pop up menu*/
+.popup-content {
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+}
+
+/*The code to make the pop up appear or visible*/
+#view1:target,
+#view2:target{
+    display: flex;
+}
+
+
+
+#delete1:target,
+#delete2:target {
+    display: flex;
+}
+
+
+
+#update1:target,
+#update2:target{
+    display:flex;
+}
+
+/*The code for styling the close, and delete button*/
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: darkred;
+}
+
+/*The code for styling the save changes button since it needs to be a different color from the other buttons(close and delete)*/
+.save-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: forestgreen;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background-color: darkgreen;
+}
+
+
+/*The code for responsiveness*/
+@media screen and (max-width:1050px){
+    .side-bar li{
+        font-size:18px;
+    }
+}
+
+@media screen and (max-width:940px){
+    .side-bar li span{
+        display:none;
+    }
+    .side-bar{
+        align-items:center;
+    }
+    .side-bar li img{
+        width:40px;
+        height:40px;
+    }
+    .side-bar li a:hover{
+        background:burlywood;
+        padding:8px 38px;
+        border:2px solid white;
+    }
+}
+
+@media screen and (max-width:536px){
+    .brand-name h3{
+        font-size:13px;
+    }
+    .container .content .cards{
+        justify-content:center;
+    }
+    .side-bar li img{
+        width:30px;
+        height:30px;
+    }
+}

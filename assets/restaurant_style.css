@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* General styling for the body content */
+body {
+    min-height: 100vh;
+    background: #f9f9f9;
+}
+
+/* Container for the entire page */
+.container {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling for the header section */
+.container .top-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    background: #e4e2dd;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.container .top-section .navigation {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+}
+
+.branding .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.branding .name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Notification icon */
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.notification img {
+    width: 30px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Styling for the content section below the header */
+.content {
+    margin-top: 10vh; /* Prevents content from being hidden behind the header */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centers the cards */
+    align-items: center;
+    height: 90vh;
+}
+
+/* The card container for different sections */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Styling for individual cards */
+.card {
+    background-color:#e4e2dd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;  /* Adjusted width to make the cards smaller */
+    height: 300px; /* Adjusted height */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for cards */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #686660;
+}
+
+.card .box {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.card .icon img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-bottom: 15px; /* Adds some spacing between the icon and the text */
+}
+
+/* Styling for modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form inside restaurant management modal */
+#restaurantForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#restaurantForm label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#restaurantForm input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#restaurantForm button {
+    padding: 10px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+#restaurantForm button:hover {
+    background: #0056b3;
+}
+
+/* Modal buttons (close, edit, delete) */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #218838;
+}
+
+/* Close button in modals */
+button:active {
+    background: #1e7e34;
+}
+
+/* Styling for tables in the Ratings modal */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+table td button {
+    background: #ffc107;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+table td button:hover {
+    background: #e0a800;
+}
+

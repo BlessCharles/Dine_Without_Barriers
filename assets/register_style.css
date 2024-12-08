@@ -1,0 +1,111 @@
+body {
+    background-image: url('../assets/images/Light\ Modern\ Textile\ Minimalism\ Desktop\ Wallpaper.png');
+    background-size: cover;
+    background-position: center;
+    padding-top: 150px;
+    text-align: center;
+    height: 100vh; /* Make the height of the body equal to the viewport height */
+    width: 100%;
+}
+
+.title {
+    font-size: 50px;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+#signupForm {
+    display: inline-block;
+    background-color: rgba(245, 245, 245, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px;
+}
+
+.form-control {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Flexbox styling to display first name and last name on the same line */
+.form-control-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-control input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.form-control input.half {
+    width: 48%; /* Half width for each input */
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 18px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 15px;
+}
+
+#submitBtn {
+    width: 100%;
+    height: 40px;
+    background-color: forestgreen;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitBtn:hover {
+    background-color: darkgreen;
+}
+
+.login-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.login-link a {
+    color: blue;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: 35px;
+    }
+
+    #signupForm {
+        width: 95%;
+        padding: 20px;
+    }
+
+    /* Adjusting layout for smaller screens */
+    .form-control-row {
+        flex-direction: column; /* Stack the inputs vertically on small screens */
+    }
+
+    .form-control input.half {
+        width: 100%; /* Full width on small screens */
+    }
+}
