@@ -29,7 +29,7 @@ body {
     left: 0;
     width: 100vw;
     height: 10vh;
-    background: #e4e2dd;
+    background: burlywood;
     display: flex;
     align-items: center;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
@@ -59,6 +59,7 @@ body {
     font-size: 24px;
     font-weight: bold;
     color: #333;
+    font-family:'Algerian';
 }
 
 /* Notification icon */
@@ -94,7 +95,7 @@ body {
 
 /* Styling for individual cards */
 .card {
-    background-color:#e4e2dd;
+    background-color:burlywood;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 250px;  /* Adjusted width to make the cards smaller */
@@ -109,7 +110,7 @@ body {
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    background-color: #686660;
+    background-color: rgb(197, 142, 70);
 }
 
 .card .box {

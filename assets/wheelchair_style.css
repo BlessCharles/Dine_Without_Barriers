@@ -17,7 +17,7 @@ body {
 .top {
     width: 100%;
     height: auto;
-    background: url("../assets/images/pexels-nadin-sh-78971847-29616285.jpg") no-repeat center center;
+    background: url("../assets/images/Light\ Modern\ Textile\ Minimalism\ Desktop\ Wallpaper.png") no-repeat center center;
     background-size: cover;
     color: black;
     text-align: center;
@@ -33,6 +33,8 @@ body {
 .top h1 {
     font-size: 36px;
     margin-bottom: 10px;
+    margin-top:20px;
+    font-family:'Algerian';
 }
 
 .top p {
@@ -91,6 +93,7 @@ body {
     text-align: center;
     font-size: 28px;
     margin-bottom: 30px;
+    margin-top:30px;
 }
 
 .restaurants-section {
@@ -139,7 +142,7 @@ body {
     flex: 1;
     margin: 0 5px;
     text-align: center;
-    background: #e4e2dd;
+    background: burlywood;
     color: black;
     padding: 15px 20px;
     border-radius: 5px;
@@ -149,7 +152,7 @@ body {
 }
 
 .button:hover {
-    background: #6e695c;
+    background: rgb(158, 107, 40);
 }
 
 /* Modal Styles */

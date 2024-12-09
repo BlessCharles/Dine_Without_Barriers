@@ -77,6 +77,9 @@ li {
     height: auto;
     object-fit: cover;
 }
+.brand-name h3{
+    font-family:'Algerian';
+}
 
 
 /*The code for the top section where the user management text appears and the background design*/
@@ -102,9 +105,11 @@ li {
 }
 
 
+
 .top h1{
     font-size:36px;
     margin-bottom:10px;
+    font-family:'Algerian';
 }
 
 

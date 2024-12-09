@@ -16,7 +16,7 @@ body {
 header {
     height: 60px;
     width: 100%;
-    background: #e4e2dd;
+    background: burlywood;
     color: black;
     display: flex;
     align-items: center;
@@ -53,6 +53,7 @@ nav ul li{
 .branding .name {
     font-size: 24px;
     font-weight: bold;
+    font-family: 'Algerian';
 }
 
 /* Styling for the section with video background */
@@ -73,12 +74,20 @@ nav ul li{
     z-index: -1; /* Push the video behind the content */
 }
 
-
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    z-index: 0; /* Place it above the video but below the text */
+}
 
 .top-section {
     position: relative;
     z-index: 1; /* Ensures the text is above the video */
-    background-color: rgba(255, 255, 255, 0.7); /* Optional: Semi-transparent background */
+     /* Optional: Semi-transparent background */
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -94,11 +103,14 @@ nav ul li{
 .top h1 {
     font-size: 36px;
     margin-bottom: 10px;
+    font-family:'Algerian';
+    color:burlywood;
 }
 
 .top p {
     font-size: 18px;
     margin-bottom: 10px;
+    color:burlywood;
 }
 
 

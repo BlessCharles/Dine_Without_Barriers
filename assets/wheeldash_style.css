@@ -26,10 +26,10 @@ body {
     left: 0;
     width: 100vw;
     height: 10vh;
-    background: white;
+    background: burlywood;
     display: flex;
     align-items: center;
-    box-shadow: 0 5px 8px burlywood;
+    box-shadow: 0 5px 8px rgb(66, 44, 14);
     padding: 0 20px;
     z-index: 1;
 }
@@ -56,6 +56,7 @@ body {
 .branding .name {
     font-size: 24px;
     font-weight: bold;
+    font-family:'Algerian';
 }
 
 /* The code for styling the notification icon */
@@ -110,6 +111,12 @@ body {
     padding: 20px;
     box-sizing: border-box;
     cursor: pointer; /* Make cards clickable */
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: rgb(197, 142, 70);
 }
 
 /* Modal styling */
