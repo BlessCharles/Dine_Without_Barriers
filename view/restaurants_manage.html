@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/users_style.css">
+    <title>Restaurant Management</title>
+</head>
+<body>
+
+    <!--The code for the side bar on the page where the navigation for dashboard, user and recipe management can be found-->
+    <div class="side-bar">
+        <div class="brand-name">
+            <h3>DWB</h3>
+        </div>
+        <ul>
+            <!-- Dashboard with a link -->
+            <li>
+                <a href="../view/dashboard.html">
+                    <img src="../assets/images/9055226_bxs_dashboard_icon.png">
+                    <p><span>Dashboard</span></p>
+                </a>
+            </li>
+    
+            <!-- User Management with a link -->
+            <li>
+                <a href="../view/users.html">
+                    <img src="../assets/images/8665306_circle_user_icon.png">
+                    <p><span>User Management</span></p>
+                </a>
+            </li>
+    
+            <!-- Recipe Management with a link -->
+            <li>
+                <a href="../view/restaurants_manage.html">
+                    <img src="../assets/images/2639899_restaurant_icon.png">
+                    <p><span>Restaurant Management</span></p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--The code for the top section where the user management name and background design appear-->
+    <header class="top">
+        <div class="top-section">
+            <h1>Restaurant Management</h1>
+                
+        </div>
+    
+    </header>
+
+    <!--The code for the table section where a table with four columns can be found-->
+    <section class="table-section">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Rate</th>
+                <th>Actions</th>
+            </tr>
+        
+            <!--The code to fill the rows in the columns for the table-->
+            <tr>
+                <td>1</td>
+                <td>Bossman Restaurant</td>
+                <td>Accra</td>
+                <td>****</td>
+                <!--The code for the three action buttons in the action column to delete, view and update-->
+                <td>
+                    <a href="#view1" class="btn">View</a>
+                    <a href="#update1" class="btn">Update</a>
+                    <a href="#delete1" class="btn">Delete</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Penaky Diner</td>
+                <td>Spintex</td>
+                <td>****</td>
+                <td>
+                    <a href="#view2" class="btn">View</a>
+                    <a href="#update2" class="btn">Update</a>
+                    <a href="#delete2" class="btn">Delete</a>
+                </td>
+            </tr>
+
+            
+        
+            
+        </table>
+        
+    </section>
+    <!--The pop up menu that appears when you click on the view button-->
+    <section id="view1" class="popup">
+        <!--The content that appears on the pop up menu-->
+        <div class="popup-content">
+            <h2>User Details</h2>
+            <p><b>Name:</b> Bossman Restaurant</p>
+            <p><b>Location:</b> Accra</p>
+            <p><b>Rate:</b> ****</p>
+            <a href="#" class="btn">Close</a>
+        </div>
+    </section>
+
+    <section id="view2" class="popup">
+        <div class="popup-content">
+            <h2>User Details</h2>
+            <p><b>Name:</b> Penaky Diner</p>
+            <p><b>Location:</b> Spintex</p>
+            <p><b>Rate:</b> ****</p>
+            <a href="#" class="btn">Close</a>
+        </div>
+    </section>
+
+    
+
+    <!--The code for the popup menu that appears when you click on the delete button-->
+    <section id="delete1" class="popup">
+        <!--The code for the content on the popup menu that appears-->
+        <div class="popup-content">
+            <h2>User Details</h2>
+            <p><b>Name:</b> Bossman Restaurant</p>
+            <p><b>Location:</b> Accra</p>
+            <p><b>Rate:</b> ****</p>
+            <a href="#" class="btn">Delete</a>
+        </div>
+    </section>
+
+    <section id="delete2" class="popup">
+        <div class="popup-content">
+            <h2>User Details</h2>
+            <p><b>Name:</b> Penaky Diner</p>
+            <p><b>Location:</b> Spintex</p>
+            <p><b>Rate:</b> ****</p>
+            <a href="#" class="btn">Delete</a>
+        </div>
+    </section>
+
+    
+
+    <!--The code for the popup menu that appears when you click on the update button-->
+    <section id="update1" class="popup">
+        <!--The code for the content on the popup menu-->
+        <div class="popup-content">
+            <h2>Update User Details</h2>
+            <form action="#">
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="Bossman Restaurant"><br><br>
+    
+                <label for="email">Location:</label>
+                <input type="email" id="email" value="Accra"><br><br>
+    
+                <label for="password">Rating:</label>
+                <input type="password" id="password" value="****"><br><br>
+    
+                
+                <a href="#" class="save-btn">Save Changes</a>
+            </form>
+        </div>
+    </section>
+
+    <section id="update2" class="popup">
+        <div class="popup-content">
+            <h2>Update User Details</h2>
+            <form action="#">
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="Penaky Diner"><br><br>
+    
+                <label for="email">Location:</label>
+                <input type="email" id="email" value="Spintex"><br><br>
+    
+                <label for="password">Rating:</label>
+                <input type="password" id="password" value="****"><br><br>
+    
+                
+                <a href="#" class="save-btn">Save Changes</a>
+            </form>
+        </div>
+    </section>
+
+    
+
+
+
+
+
+</body>
+</html>
