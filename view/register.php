@@ -69,7 +69,7 @@
     
         <button type="submit" id="submitBtn"><b>Sign Up</b></button>
     
-        <p class="login-link">Already have an account? <a href="../view/login.html">Log in</a></p>
+        <p class="login-link">Already have an account? <a href="../view/login.php">Log in</a></p>
     </form>
     
 
@@ -87,13 +87,14 @@
         if (successMessage) successMessage.textContent = "";
 
         // Email pattern for Ashesi emails
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@ashesi\.edu\.gh$/;
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 
         // Email validation
         if (email === "") {
             errorMessages.push("Email is required!");
         } else if (!emailPattern.test(email)) {
-            errorMessages.push("Invalid email format. Use @ashesi.edu.gh domain.");
+            errorMessages.push("Invalid email format.");
         }
 
         // Password validations

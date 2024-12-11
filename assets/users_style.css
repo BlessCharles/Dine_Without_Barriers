@@ -184,10 +184,8 @@ table a.btn:hover {
     margin: auto;
 }
 
-/*The code to make the pop up appear or visible*/
-#view1:target,
-#view2:target{
-    display: flex;
+.popup:target{
+    display:flex;
 }
 
 
@@ -199,10 +197,7 @@ table a.btn:hover {
 
 
 
-#update1:target,
-#update2:target{
-    display:flex;
-}
+
 
 /*The code for styling the close, and delete button*/
 .btn {

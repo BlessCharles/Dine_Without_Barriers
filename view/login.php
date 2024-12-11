@@ -26,7 +26,7 @@
 
             <button type="submit" class="login-button"><b>Log in</b></button>
             
-            <p class="signup-text">Don't have an account? <a href="../view/register.html">Register</a></p>
+            <p class="signup-text">Don't have an account? <a href="../view/register.php">Register</a></p>
         </form>
 
         <script>

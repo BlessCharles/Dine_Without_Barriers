@@ -1,3 +1,40 @@
+<?php
+// The code to connect to the database
+include '../db/config.php';
+
+//The code to enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// The code to start session
+session_start();
+
+//The code to redirect user to login page if not logged in
+if (!isset($_SESSION['UserID'])) {
+    header('Location:view/login.html');
+    exit;
+}
+
+//The code to fetch the user's data from the session
+$user_id = $_SESSION['UserID'];
+$email = $_SESSION['Email'];
+$role = $_SESSION['UserType'];
+
+//The code for the query to get total users, recipes, and active users
+$totalUsersQuery = "SELECT COUNT(*) FROM DWB_Users";
+$totalUsersResult = $conn->query($totalUsersQuery);
+$totalUsers = $totalUsersResult->fetch_row()[0];
+
+$totalRatingsQuery = "SELECT COUNT(*) FROM DWB_Ratings";
+$totalRatingsResult = $conn->query($totalRatingsQuery);
+$totalRatings = $totalRatingsResult->fetch_row()[0];
+
+$activeUsersQuery = "SELECT COUNT(*) FROM DWB_Users  ";
+$activeUsersResult = $conn->query($activeUsersQuery);
+$activeUsers = $activeUsersResult->fetch_row()[0];
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +52,7 @@
         <ul>
             <!-- Dashboard with a link -->
             <li>
-                <a href="../view/dashboard.html">
+                <a href="../view/dashboard.php">
                     <img src="../assets/images/9055226_bxs_dashboard_icon.png">
                     <p><span>Dashboard</span></p>
                 </a>
@@ -23,7 +60,7 @@
     
             <!-- User Management with a link -->
             <li>
-                <a href="../view/users.html">
+                <a href="../view/users.php">
                     <img src="../assets/images/8665306_circle_user_icon.png">
                     <p><span>User Management</span></p>
                 </a>
@@ -31,7 +68,7 @@
     
             <!-- Recipe Management with a link -->
             <li>
-                <a href="../view/restaurants_manage.html">
+                <a href="../view/restaurants_manage.php">
                     <img src="../assets/images/2639899_restaurant_icon.png">
                     <p><span>Restaurant Management</span></p>
                 </a>
@@ -60,7 +97,7 @@
                 <!--This code is for the first card with information about the total users-->
                 <div class="card">
                     <div class="box">
-                        <h1>5</h1>
+                        <h1><?php echo $totalUsers; ?></h1>
                         <h3>Total Users</h3>
                     </div>
                     <div class="icon">
@@ -68,21 +105,12 @@
                     </div>
                 </div>
                 
-                <!--This code is for the second card with information about the recipes-->
-                <div class="card">
-                    <div class="box">
-                        <h1>12</h1>
-                        <h3>Total Restaurants</h3>
-                    </div>
-                    <div class="icon">
-                        <img src="../assets/images/753929_restaurant_cooking_eating_food_kitchen_icon.png" alt="Restaurants icon">
-                    </div>
-                </div>
+                
                 
                 <!--This code is for the third card with information about the delete icon-->
                 <div class="card">
                     <div class="box">
-                        <h1>3</h1>
+                        <h1><?php echo $totalRatings; ?></h1>
                         <h3>Ratings</h3>
                     </div>
                     <div class="icon">
@@ -93,7 +121,7 @@
                 <!-- This code is for the fourth card with information about the active users-->
                 <div class="card">
                     <div class="box">
-                        <h1>5</h1>
+                        <h1><?php echo $activeUsers; ?></h1>
                         <h3>Active users</h3>
                     </div>
                     <div class="icon">
