@@ -1,13 +1,22 @@
+<?php
+require_once '../actions/get_restaurants.php';
+// Assume user is logged in and we have their UserID
+$currentUserId = 1; // This would come from your login system
+
+// Get explore restaurants from database
+$exploreRestaurants = getExploreRestaurants();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/wheelchair_style.css">
     <title>Wheelchair user page</title>
 </head>
 <body>
-    <!--The code for the top part of the page where there is a few words and a search box to filter the recipes by a keyword-->
+    <!-- Existing header code remains the same -->
     <header class="top">
         <div class="top-section">
             <h1>Welcome Bless</h1>
@@ -16,170 +25,50 @@
                 <input type="text" placeholder="Search for Restaurants">
                 <button type="submit">Search</button>
             </form>
-            <a href="../view/wheelchair_dashboard.html">Go to Dashboard</a>
+            <a href="../view/wheelchair_dashboard.php">Go to Dashboard</a>
         </div>
 
     </header>
 
-    <!--The code for the featured recipes, with their picture, name, short description and rating-->
     <section class="restaurants">
-        <h1>Featured Restaurants</h1>
         
 
-        <div class="restaurants-section">
-            <div class="restaurants-card">
-                <img src ="../assets/images/elevate-RBuF5GfN8ts-unsplash.jpg" alt="Image of Bossman restaurant">
-                <h2>Bossman restaurant</h2>
-                <p>Dining with a touch of family</p>
-                <!--The code for how the stars are filled or colored-->
+        <!-- Explore Restaurants (now dynamically populated) -->
+        <h1>Explore Restaurants</h1>
+        <div class="restaurants-section" id="explore-restaurants">
+            <?php foreach ($exploreRestaurants as $restaurant): ?>
+            <div class="restaurants-card" data-restaurant-id="<?php echo $restaurant['RestaurantID']; ?>">
+                <img src="<?php echo htmlspecialchars($restaurant['RestaurantImage']); ?>" alt="Image of <?php echo htmlspecialchars($restaurant['ResName']); ?>">
+                <h2><?php echo htmlspecialchars($restaurant['ResName']); ?></h2>
+                <p><?php echo htmlspecialchars($restaurant['AccessibilityFeatures']); ?></p>
                 <div class="rating-container">
                     <div class="rating">
-                        <span>&#9733;</span><!--The code for a filled or colored star-->
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span><!--The code for an empty or unfilled star-->
+                        <?php
+                        $rating = round($restaurant['AverageRating']);
+                        for ($i = 1; $i <= 5; $i++) {
+                            echo $i <= $rating ? '&#9733;' : '&#9734;';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
+                    <a href="#" class="button view-btn">View</a>
+                    <a href="#" class="button rate-btn">Rate</a>
                 </div>
             </div>
-        
-            
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/elevate-vofmJUVScDE-unsplash.jpg" alt="Image of Penaky Diner">
-                <h2>Penaky Diner</h2>
-                <p>Dine with fresh blueberry wine</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-elevate-3009803.jpg" alt="Image of Friends of Friends">
-                <h2>Friends of Friends</h2>
-                <p>Best Pasta place with friends</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/shivani-g-bROdjExthjA-unsplash.jpg" alt="Image of Poky Pee">
-                <h2>Poky Pee</h2>
-                <p>A relaxing morning with the best breakfast</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-        
-        </div>
-
-        <!--The code for the breakfast options on the recipe page-->
-        <h1>Explore restaurants</h1>
-        <div class="restaurants-section">
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-abdellah-ziki-1621531168-29473845.jpg" alt="Image of Asanka">
-                <h2>Asanka</h2>
-                <p>A taste of home</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-bertellifotografia-16674093.jpg" alt="Image of Hallmark">
-                <h2>Hallmark</h2>
-                <p>The first listening restaurant</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-pixabay-262978.jpg" alt="Image of munchies">
-                <h2>Munchies</h2>
-                <p>Always available</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    <a href="#" class="button">Rate</a>
-                </div>
-            </div>
-
-
+            <?php endforeach; ?>
         </div>
     </section>
 
-    <!-- Modal for Restaurant Details -->
+    <!-- Restaurant Details Modal -->
     <div id="restaurant-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <img id="modal-image" src="" alt="Restaurant Image">
             <h2 id="modal-name"></h2>
-            <p id="modal-location"></p>
+            <p id="modal-address"></p>
+            <p id="modal-phone"></p>
+            <p id="modal-accessibility"></p>
             <div id="modal-rating"></div>
         </div>
     </div>
@@ -189,6 +78,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 id="rateModalRestaurantName"></h2>
+            <input type="hidden" id="rateModalRestaurantId" value="">
             <div class="rating-container" id="ratingStars">
                 <span class="star" data-value="1">&#9734;</span>
                 <span class="star" data-value="2">&#9734;</span>
@@ -203,166 +93,152 @@
         </div>
     </div>
 
-
-
-
-
     <script>
-        function initializeModal() {
-            const modal = document.getElementById("restaurant-modal");
-            const modalImage = document.getElementById("modal-image");
-            const modalName = document.getElementById("modal-name");
-            const modalLocation = document.getElementById("modal-location");
-            const modalRating = document.getElementById("modal-rating");
-            const closeModal = document.querySelector(".close-btn");
-
-            // Data for restaurants
-            const restaurantData = {
-                bossmanrestaurant: {
-                    image: "../assets/images/elevate-RBuF5GfN8ts-unsplash.jpg",
-                    name: "Bossman Restaurant",
-                    location: "Accra, Ghana",
-                    rating: "⭐⭐⭐⭐☆",
-                },
+    document.addEventListener('DOMContentLoaded', function() {
+        // View Restaurant Details
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const restaurantCard = this.closest('.restaurants-card');
+                const restaurantId = restaurantCard.getAttribute('data-restaurant-id');
                 
-                asanka: {
-                    image: "../assets/images/pexels-abdellah-ziki-1621531168-29473845.jpg",
-                    name: "Asanka",
-                    location: "Spintex, Ghana",
-                    rating: "⭐⭐⭐☆☆",
-                },
-            };
+                fetch(`../actions/get_restaurant_details.php?id=${restaurantId}`)
+                    .then(response => response.json())
+                    .then(restaurant => {
+                        document.getElementById('modal-image').src = restaurant.RestaurantImage;
+                        document.getElementById('modal-name').textContent = restaurant.ResName;
+                        document.getElementById('modal-address').textContent = `Address: ${restaurant.ResAddress}`;
+                        document.getElementById('modal-phone').textContent = `Phone: ${restaurant.PhoneNumber}`;
+                        document.getElementById('modal-accessibility').textContent = `Accessibility: ${restaurant.AccessibilityFeatures}`;
+                        
+                        const modal = document.getElementById('restaurant-modal');
+                        modal.style.display = 'flex';
+                    });
+            });
+        });
 
-            // Add event listeners to "View" buttons
-            document.querySelectorAll(".button").forEach((button) => {
-                button.addEventListener("click", (event) => {
-                    if (button.textContent === "View") {
-                        const restaurantId = button.closest(".restaurants-card").querySelector("h2").textContent.toLowerCase().replace(/\s/g, '');
-                        const data = restaurantData[restaurantId];
+        // Rate Restaurant
+        document.querySelectorAll('.rate-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const restaurantCard = this.closest('.restaurants-card');
+                const restaurantId = restaurantCard.getAttribute('data-restaurant-id');
+                const restaurantName = restaurantCard.querySelector('h2').textContent;
 
-                        if (data) {
-                            modalImage.src = data.image;
-                            modalName.textContent = data.name;
-                            modalLocation.textContent = `Location: ${data.location}`;
-                            modalRating.textContent = data.rating;
-                            modal.style.display = "flex";
-                        }
+                document.getElementById('rateModalRestaurantName').textContent = restaurantName;
+                document.getElementById('rateModalRestaurantId').value = restaurantId;
+
+                const rateModal = document.getElementById('rateModal');
+                rateModal.style.display = 'block';
+
+                // Reset and setup star rating
+                resetStars();
+                setupStarClickListeners();
+            });
+        });
+
+        // Save Rating
+        document.getElementById('saveRating').addEventListener('click', function() {
+            const restaurantId = document.getElementById('rateModalRestaurantId').value;
+            const filledStars = document.querySelectorAll('#ratingStars .star.filled').length;
+
+            if (filledStars > 0) {
+                fetch('../actions/save_rating.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `RestaurantID=${restaurantId}&Rating=${filledStars}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`You rated this restaurant ${filledStars} stars!`);
+                        closeModals();
+                        
+                        // Optionally reload or update the page/ratings
+                        location.reload();
+                    } else {
+                        alert('Failed to save rating.');
+                    }
+                });
+            } else {
+                alert("You didn't select any rating.");
+            }
+        });
+
+        // Star Rating Functions (keep existing star rating logic)
+        function resetStars() {
+            document.querySelectorAll('#ratingStars .star').forEach((star) => {
+                star.classList.remove('filled');
+                star.innerHTML = '&#9734;';
+            });
+        }
+
+        function setupStarClickListeners() {
+            document.querySelectorAll('#ratingStars .star').forEach((star) => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(star.getAttribute('data-value'));
+
+                    // Reset all stars
+                    resetStars();
+
+                    // Fill stars up to the clicked one
+                    for (let i = 0; i < value; i++) {
+                        const currentStar = document.querySelector(`#ratingStars .star[data-value="${i + 1}"]`);
+                        currentStar.classList.add('filled');
+                        currentStar.innerHTML = '&#9733;';
                     }
                 });
             });
-
-            // Close modal
-            closeModal.addEventListener("click", () => {
-                modal.style.display = "none";
-            });
-
-            // Close modal when clicking outside the content
-            window.addEventListener("click", (event) => {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
         }
 
-        // Initialize modal functionality
-        initializeModal();
+        // Clear Rating
+        document.getElementById('clearRating').addEventListener('click', resetStars);
 
-        function initializeRatingFeature() {
-            // Handle "Rate" button clicks
-            document.querySelectorAll(".button-container .button").forEach((button) => {
-                if (button.textContent.trim() === "Rate") {
-                    button.addEventListener("click", function () {
-                        const restaurantName = button
-                            .closest(".restaurants-card")
-                            .querySelector("h2").textContent;
+        // Close Modals
+        document.querySelectorAll('.close, .close-btn').forEach(closeBtn => {
+            closeBtn.addEventListener('click', closeModals);
+        });
 
-                        // Populate modal with restaurant name
-                        document.getElementById("rateModalRestaurantName").textContent =
-                            restaurantName;
-
-                        // Show the rate modal
-                        const rateModal = document.getElementById("rateModal");
-                        rateModal.style.display = "block";
-
-                        // Reset stars and event listeners
-                        resetStars();
-                        setupStarClickListeners();
-                    });
-                }
-            });
-
-            // Close modal functionality
-            document.querySelectorAll(".modal .close").forEach((closeBtn) => {
-                closeBtn.addEventListener("click", function () {
-                    closeModals();
-                });
-            });
-
-            window.addEventListener("click", function (event) {
-                const rateModal = document.getElementById("rateModal");
-                if (event.target === rateModal) {
-                    closeModals();
-                }
-            });
-
-            // Reset stars
-            function resetStars() {
-                document.querySelectorAll("#ratingStars .star").forEach((star) => {
-                    star.classList.remove("filled");
-                });
-            }
-
-            // Set up star click listeners
-            function setupStarClickListeners() {
-                document.querySelectorAll("#ratingStars .star").forEach((star) => {
-                    star.addEventListener("click", function () {
-                        const value = parseInt(star.getAttribute("data-value"));
-
-                        // Fill stars up to the clicked one
-                        resetStars();
-                        for (let i = 0; i < value; i++) {
-                            document
-                                .querySelector(
-                                    `#ratingStars .star[data-value="${i + 1}"]`
-                                )
-                                .classList.add("filled");
-                        }
-                    });
-                });
-            }
-
-            // Clear rating
-            document
-                .getElementById("clearRating")
-                .addEventListener("click", function () {
-                    resetStars();
-                });
-
-            // Save rating
-            document.getElementById("saveRating").addEventListener("click", function () {
-                const filledStars = document.querySelectorAll(
-                    "#ratingStars .star.filled"
-                ).length;
-
-                if (filledStars > 0) {
-                    alert(`You rated this restaurant ${filledStars} stars!`);
-                } else {
-                    alert("You didn't select any rating.");
-                }
-
-                // Close modal after saving
-                closeModals();
-            });
-
-            // Close modals
-            function closeModals() {
-                document.getElementById("rateModal").style.display = "none";
-            }
+        function closeModals() {
+            document.getElementById('restaurant-modal').style.display = 'none';
+            document.getElementById('rateModal').style.display = 'none';
         }
 
-        // Initialize rating functionality
-        initializeRatingFeature();
-
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const restaurantModal = document.getElementById('restaurant-modal');
+            const rateModal = document.getElementById('rateModal');
+            
+            if (event.target === restaurantModal) {
+                restaurantModal.style.display = 'none';
+            }
+            
+            if (event.target === rateModal) {
+                rateModal.style.display = 'none';
+            }
+        });
+    });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,26 +15,32 @@ if (!isset($_SESSION['UserID'])) {
     exit;
 }
 
-// Get current restaurant's ID (assuming it's stored in session)
-$restaurantId = $_SESSION['RestaurantID'];
+// Get current user's ID
+$userId = $_SESSION['UserID'];
 
-// Fetch restaurant details
-$restaurantQuery = "SELECT * FROM DWB_Restaurants WHERE RestaurantID = ?";
+// Check if user has submitted restaurant details
+$restaurantQuery = "SELECT * FROM DWB_Restaurants WHERE UserID = ?";
 $restaurantStmt = $conn->prepare($restaurantQuery);
-$restaurantStmt->bind_param("i", $restaurantId);
+$restaurantStmt->bind_param("i", $userId);
 $restaurantStmt->execute();
 $restaurantResult = $restaurantStmt->get_result();
 $restaurantDetails = $restaurantResult->fetch_assoc();
 
-// Fetch ratings for this restaurant
-$ratingsQuery = "SELECT u.FirstName, u.LastName, r.Rating
-                FROM DWB_Ratings r
-                JOIN DWB_Users u ON r.UserID = u.UserID
-                WHERE r.RestaurantID = ?";
-$ratingsStmt = $conn->prepare($ratingsQuery);
-$ratingsStmt->bind_param("i", $restaurantId);
-$ratingsStmt->execute();
-$ratingsResult = $ratingsStmt->get_result();
+// Determine if user has submitted details
+$hasRestaurantDetails = $restaurantResult->num_rows > 0;
+
+// Fetch ratings if restaurant exists
+$ratingsResult = null;
+if ($hasRestaurantDetails) {
+    $ratingsQuery = "SELECT u.FirstName, u.LastName, r.Rating
+                    FROM DWB_Ratings r
+                    JOIN DWB_Users u ON r.UserID = u.UserID
+                    WHERE r.RestaurantID = ?";
+    $ratingsStmt = $conn->prepare($ratingsQuery);
+    $ratingsStmt->bind_param("i", $restaurantDetails['RestaurantID']);
+    $ratingsStmt->execute();
+    $ratingsResult = $ratingsStmt->get_result();
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +54,7 @@ $ratingsResult = $ratingsStmt->get_result();
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
@@ -129,14 +135,21 @@ $ratingsResult = $ratingsStmt->get_result();
     <!-- Restaurant Profile Modal -->
     <div id="restaurantProfileModal" class="modal">
         <div class="modal-content">
-            <h2>Restaurant Profile</h2>
-            <p><strong>Restaurant Name:</strong> <?php echo htmlspecialchars($restaurantDetails['ResName']); ?></p>
-            <p><strong>Address:</strong> <?php echo htmlspecialchars($restaurantDetails['ResAddress']); ?></p>
-            <p><strong>Phone:</strong> <?php echo htmlspecialchars($restaurantDetails['PhoneNumber']); ?></p>
-            <p><strong>Accessibility Features:</strong> <?php echo htmlspecialchars($restaurantDetails['AccessibilityFeatures']); ?></p>
+            <?php if ($hasRestaurantDetails): ?>
+                <h2>Restaurant Profile</h2>
+                <p><strong>Restaurant Name:</strong> <?php echo htmlspecialchars($restaurantDetails['ResName']); ?></p>
+                <p><strong>Address:</strong> <?php echo htmlspecialchars($restaurantDetails['ResAddress']); ?></p>
+                <p><strong>Phone:</strong> <?php echo htmlspecialchars($restaurantDetails['PhoneNumber']); ?></p>
+                <p><strong>Accessibility Features:</strong> <?php echo htmlspecialchars($restaurantDetails['AccessibilityFeatures']); ?></p>
+                
+                <button onclick="openEditProfileModal()">Edit Profile</button>
+                <button onclick="deleteRestaurantAccount()">Delete Account</button>
+            <?php else: ?>
+                <h2>No Restaurant Information</h2>
+                <p>You haven't added any restaurant details yet.</p>
+                <p>Please use the "Add Restaurant Details" section to get started.</p>
+            <?php endif; ?>
             
-            <button onclick="openEditProfileModal()">Edit Profile</button>
-            <button onclick="deleteRestaurantAccount()">Delete Account</button>
             <button onclick="logout()">Logout</button>
             <button onclick="closeModal('restaurantProfileModal')">Close</button>
         </div>
@@ -172,10 +185,10 @@ $ratingsResult = $ratingsStmt->get_result();
         </div>
     </div>
 
-    <!-- Add/Manage Restaurant Details Modal -->
+    <!-- Restaurant Management Modal -->
     <div id="restaurantManagementModal" class="modal">
         <div class="modal-content">
-            <h2>Add/Manage Restaurant Details</h2>
+            <h2>Add Restaurant Details</h2>
             <form id="restaurantForm" action="../actions/add_restaurant.php" method="POST" enctype="multipart/form-data">
                 <label for="restaurantName">Restaurant Name:</label>
                 <input type="text" id="restaurantName" name="ResName" placeholder="Enter Restaurant Name" required>
@@ -192,7 +205,7 @@ $ratingsResult = $ratingsStmt->get_result();
                 <label for="restaurantImage">Restaurant Image:</label>
                 <input type="file" id="restaurantImage" name="restaurantImage" accept="image/*" required>
                 
-                <button type="submit">Add Restaurant Details</button>
+                <button type="submit">Submit Restaurant Details</button>
                 <button type="button" onclick="closeModal('restaurantManagementModal')">Close</button>
             </form>
         </div>
@@ -227,6 +240,58 @@ $ratingsResult = $ratingsStmt->get_result();
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasDetails = <?php echo $hasRestaurantDetails ? 'true' : 'false'; ?>;
+            const restaurantManagementCard = document.getElementById('restaurantManagementCard');
+
+            if (!hasDetails) {
+                restaurantManagementCard.style.backgroundColor = '#ffdddd';
+                restaurantManagementCard.style.border = '2px solid red';
+                restaurantManagementCard.querySelector('h3').textContent = 'ADD RESTAURANT DETAILS (REQUIRED)';
+                restaurantManagementCard.querySelector('h3').style.color = 'red';
+            }
+
+            // Restaurant Profile Card Event Listener
+            document.getElementById('restaurantProfileCard').addEventListener('click', function() {
+                <?php if (!$hasRestaurantDetails): ?>
+                    alert('Please add restaurant details first.');
+                    openModal('restaurantManagementModal');
+                <?php else: ?>
+                    openModal('restaurantProfileModal');
+                <?php endif; ?>
+            });
+
+            // Restaurant Management Card Event Listener
+            document.getElementById('restaurantManagementCard').addEventListener('click', function() {
+                openModal('restaurantManagementModal');
+            });
+
+            // View Ratings Card Event Listener
+            document.getElementById('viewRatingsCard').addEventListener('click', function() {
+                openModal('viewRatingsModal');
+            });
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+            } else {
+                console.error('Modal not found: ' + modalId);
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            } else {
+                console.error('Modal not found: ' + modalId);
+            }
+        }
+
+        // Additional functions
         function openEditProfileModal() {
             closeModal('restaurantProfileModal');
             openModal('editRestaurantProfileModal');
@@ -242,27 +307,7 @@ $ratingsResult = $ratingsStmt->get_result();
             window.location.href = '../actions/logout.php';
         }
 
-        // Existing modal functions from previous script
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Event listeners for cards
-        document.getElementById('restaurantProfileCard').addEventListener('click', function() {
-            openModal('restaurantProfileModal');
-        });
-
-        document.getElementById('restaurantManagementCard').addEventListener('click', function() {
-            openModal('restaurantManagementModal');
-        });
-
-        document.getElementById('viewRatingsCard').addEventListener('click', function() {
-            openModal('viewRatingsModal');
-        });
+        
     </script>
 </body>
 </html>
@@ -270,7 +315,9 @@ $ratingsResult = $ratingsStmt->get_result();
 <?php
 // Close database connections
 $restaurantStmt->close();
-$ratingsStmt->close();
+if ($hasRestaurantDetails) {
+    $ratingsStmt->close();
+}
 $conn->close();
 ?>
 

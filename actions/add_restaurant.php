@@ -28,8 +28,8 @@ if (isset($_FILES['restaurantImage']) && $_FILES['restaurantImage']['error'] == 
     }
 }
 
-// Prepare insert query
-$query = "INSERT INTO DWB_Restaurants
+// Prepare insert query for pending restaurants table
+$query = "INSERT INTO DWB_Restaurant_Pending
         (UserID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage)
         VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -45,12 +45,9 @@ $stmt->bind_param("isssss",
 
 // Execute insert
 if ($stmt->execute()) {
-    // Get the new restaurant ID and store in session
-    $_SESSION['RestaurantID'] = $stmt->insert_id;
-    $_SESSION['success'] = "Restaurant details added successfully and awaiting approval";
-    
+    $_SESSION['success'] = "Restaurant details submitted and awaiting admin approval";
 } else {
-    $_SESSION['error'] = "Failed to add restaurant details";
+    $_SESSION['error'] = "Failed to submit restaurant details";
 }
 
 $stmt->close();
@@ -58,3 +55,4 @@ $conn->close();
 
 header('Location: ../view/restaurant.php');
 exit;
+?>

@@ -15,8 +15,10 @@ if (!isset($_SESSION['UserID'])) {
     exit;
 }
 
-//The code for a query to fetch all restaurants from the database
-$query = "SELECT RestaurantID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures FROM DWB_Restaurants";
+//The code for a query to fetch pending restaurants from the database
+$query = "SELECT p.PendingID, p.ResName, p.ResAddress, p.PhoneNumber, p.AccessibilityFeatures, p.RestaurantImage, u.FirstName, u.LastName 
+        FROM DWB_Restaurant_Pending p
+        JOIN DWB_Users u ON p.UserID = u.UserID";
 $result = $conn->query($query);
 ?>
 
@@ -73,6 +75,7 @@ $result = $conn->query($query);
     <section class="table-section">
         <table>
             <tr>
+                <th>Submitted By</th>
                 <th>Name</th>
                 <th>Location</th>
                 <th>Phone Number</th>
@@ -81,24 +84,31 @@ $result = $conn->query($query);
             </tr>
         
             <?php
-            // Check if restaurants exist
+            // Check if pending restaurants exist
             if ($result->num_rows > 0) {
-                // Loop through all restaurants and populate the table rows
+                // Loop through all pending restaurants and populate the table rows
                 while ($restaurant = $result->fetch_assoc()) {
                     echo '<tr>';
+                    echo '<td>' . htmlspecialchars($restaurant['FirstName'] . ' ' . $restaurant['LastName']) . '</td>';
                     echo '<td>' . htmlspecialchars($restaurant['ResName']) . '</td>';
                     echo '<td>' . htmlspecialchars($restaurant['ResAddress']) . '</td>';
                     echo '<td>' . htmlspecialchars($restaurant['PhoneNumber']) . '</td>';
                     echo '<td>' . htmlspecialchars($restaurant['AccessibilityFeatures']) . '</td>';
-                    
+                
                     echo '<td>
-                            <a href="#view' . htmlspecialchars($restaurant['RestaurantID']) . '" class="btn">Approve</a>
-                            <a href="#update' . htmlspecialchars($restaurant['RestaurantID']) . '" class="btn">Disapprove</a>
+                            <form action="../actions/approve_restaurant.php" method="post" style="display:inline;">
+                                <input type="hidden" name="pendingId" value="' . htmlspecialchars($restaurant['PendingID']) . '">
+                                <button type="submit" name="action" value="approve" class="btn">Approve</button>
+                            </form>
+                            <form action="../actions/approve_restaurant.php" method="post" style="display:inline;">
+                                <input type="hidden" name="pendingId" value="' . htmlspecialchars($restaurant['PendingID']) . '">
+                                <button type="submit" name="action" value="disapprove" class="btn">Disapprove</button>
+                            </form>
                         </td>';
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="5">No restaurants found</td></tr>';
+                echo '<tr><td colspan="6">No pending restaurants found</td></tr>';
             }
             ?>
         </table>

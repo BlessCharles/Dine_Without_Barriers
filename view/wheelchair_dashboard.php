@@ -7,6 +7,7 @@
     <title>Wheelchair user dashboard</title>
 </head>
 <body>
+    <!-- Previous header and navigation code remains the same -->
     <!-- The code for the top navigation bar (where the search box and the navigation icon is located)-->
     <div class="container">
         <header class="top-section">
@@ -48,16 +49,19 @@
         </div>
     </div>
 
+    <!-- Modals remain mostly the same, but we'll modify their content dynamically -->
     <!-- User Profile Pop-Up Modal -->
     <div id="userProfileModal" class="modal">
         <div class="modal-content">
             <h2>User Profile</h2>
-            <p><strong>Full Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Username:</strong> johndoe123</p>
-            <button onclick="editProfile()">Edit</button>
-            <button onclick="deleteAccount()">Delete Account</button>
-            <button id="userProfileModalClose">Close</button>
+            <p><strong>Full Name:</strong> <span id="profileFullName"></span></p>
+            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            <div class="button-container">
+                <button id="editProfileBtn">Edit</button>
+                <button id="deleteAccountBtn">Delete Account</button>
+                <button id="logoutBtn">Logout</button>
+                <button id="userProfileModalClose">Close</button>
+            </div>
         </div>
     </div>
 
@@ -65,7 +69,7 @@
     <div id="ratingsModal" class="modal">
         <div class="modal-content">
             <h2>My Ratings</h2>
-            <table>
+            <table id="ratingsTable">
                 <thead>
                     <tr>
                         <th>Restaurant</th>
@@ -73,103 +77,109 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Restaurant 1</td>
-                        <td>⭐⭐⭐⭐</td>
-                        <td>
-                            <button onclick="editRating()">Edit</button>
-                            <button onclick="deleteRating()">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Restaurant 2</td>
-                        <td>⭐⭐⭐⭐⭐</td>
-                        <td>
-                            <button onclick="editRating()">Edit</button>
-                            <button onclick="deleteRating()">Delete</button>
-                        </td>
-                    </tr>
+                <tbody id="ratingsTableBody">
+                    <!-- Ratings will be dynamically populated here -->
                 </tbody>
             </table>
             <button id="ratingsModalClose">Close</button>
         </div>
     </div>
 
-    <script >
-        document.addEventListener('DOMContentLoaded', function() {
-            // Main function to handle modal actions and card clicks
-            function setupDashboard() {
-                // Open User Profile modal
-                function openUserProfileModal() {
-                    document.getElementById('userProfileModal').style.display = 'flex';
-                }
-
-                // Open Ratings modal
-                function openRatingsModal() {
-                    document.getElementById('ratingsModal').style.display = 'flex';
-                }
-
-                // Close a modal by ID
-                function closeModal(modalId) {
-                    document.getElementById(modalId).style.display = 'none';
-                }
-
-                // Edit Profile action
-                function editProfile() {
-                    alert('Editing profile...');
-                }
-
-                // Delete Account action
-                function deleteAccount() {
-                    alert('Account deleted!');
-                }
-
-                // Edit Rating action
-                function editRating() {
-                    alert('Editing rating...');
-                }
-
-                // Delete Rating action
-                function deleteRating() {
-                    alert('Rating deleted!');
-                }
-
-                // Attach event listeners to the cards for opening modals
-                document.getElementById('userProfileCard').addEventListener('click', openUserProfileModal);
-                document.getElementById('ratingsCard').addEventListener('click', openRatingsModal);
-
-                // Attach event listeners to the close buttons of modals
-                document.getElementById('userProfileModalClose').addEventListener('click', function() {
-                    closeModal('userProfileModal');
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Open User Profile modal and fetch user data
+        document.getElementById('userProfileCard').addEventListener('click', function() {
+            fetch('../actions/get_user_profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('profileFullName').textContent = data.fullName;
+                        document.getElementById('profileEmail').textContent = data.email;
+                        document.getElementById('userProfileModal').style.display = 'flex';
+                    } else {
+                        alert('Failed to fetch user profile');
+                    }
                 });
-
-                document.getElementById('ratingsModalClose').addEventListener('click', function() {
-                    closeModal('ratingsModal');
-                });
-
-                // Attach actions for edit and delete
-                document.querySelectorAll('button[onclick="editProfile()"]').forEach(function(button) {
-                    button.addEventListener('click', editProfile);
-                });
-
-                document.querySelectorAll('button[onclick="deleteAccount()"]').forEach(function(button) {
-                    button.addEventListener('click', deleteAccount);
-                });
-
-                document.querySelectorAll('button[onclick="editRating()"]').forEach(function(button) {
-                    button.addEventListener('click', editRating);
-                });
-
-                document.querySelectorAll('button[onclick="deleteRating()"]').forEach(function(button) {
-                    button.addEventListener('click', deleteRating);
-                });
-            }
-
-            // Call the setup function after DOM is loaded
-            setupDashboard();
         });
 
+        // Open Ratings modal and fetch ratings
+        document.getElementById('ratingsCard').addEventListener('click', function() {
+            fetch('../actions/get_user_ratings.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const tableBody = document.getElementById('ratingsTableBody');
+                        tableBody.innerHTML = ''; // Clear existing rows
+
+                        data.ratings.forEach(rating => {
+                            const row = document.createElement('tr');
+                            
+                            // Restaurant Name
+                            const nameCell = document.createElement('td');
+                            nameCell.textContent = rating.ResName;
+                            row.appendChild(nameCell);
+
+                            // Rating (convert to stars)
+                            const ratingCell = document.createElement('td');
+                            ratingCell.textContent = '★'.repeat(rating.Rating) + '☆'.repeat(5 - rating.Rating);
+                            row.appendChild(ratingCell);
+
+                            // Actions
+                            const actionCell = document.createElement('td');
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.textContent = 'Delete';
+                            deleteBtn.addEventListener('click', function() {
+                                if (confirm(`Are you sure you want to delete rating for ${rating.ResName}?`)) {
+                                    fetch('../actions/delete_rating.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded',
+                                        },
+                                        body: `restaurantName=${encodeURIComponent(rating.ResName)}`
+                                    })
+                                    .then(response => response.json())
+                                    .then(result => {
+                                        if (result.success) {
+                                            row.remove(); // Remove the row from the table
+                                            alert('Rating deleted successfully');
+                                        } else {
+                                            alert('Failed to delete rating');
+                                        }
+                                    });
+                                }
+                            });
+                            actionCell.appendChild(deleteBtn);
+                            row.appendChild(actionCell);
+
+                            tableBody.appendChild(row);
+                        });
+
+                        document.getElementById('ratingsModal').style.display = 'flex';
+                    } else {
+                        alert('Failed to fetch ratings');
+                    }
+                });
+        });
+
+        // Close modal buttons
+        document.getElementById('userProfileModalClose').addEventListener('click', function() {
+            document.getElementById('userProfileModal').style.display = 'none';
+        });
+
+        document.getElementById('ratingsModalClose').addEventListener('click', function() {
+            document.getElementById('ratingsModal').style.display = 'none';
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // You'll need to create a logout.php script
+            fetch('../actions/logout.php')
+                .then(response => {
+                    // Redirect to login page
+                    window.location.href = '../view/login.php';
+                });
+        });
+    });
     </script>
 </body>
 </html>

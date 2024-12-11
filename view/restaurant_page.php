@@ -1,176 +1,30 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/wheelchair_style.css">
-    <title>Wheelchair user page</title>
+    <title>Restaurant user page</title>
 </head>
 <body>
     <!--The code for the top part of the page where there is a few words and a search box to filter the recipes by a keyword-->
     <header class="top">
         <div class="top-section">
             <h1>Welcome Bless</h1>
-            <p> You are a search away from inclusive dining!</p>
-            <form action="#" class="search-box" >
-                <input type="text" placeholder="Search for Restaurants">
+            <p>You are a search away from inclusive dining!</p>
+            <form action="#" class="search-box">
+                <input type="text" id="search-input" placeholder="Search for Restaurants">
                 <button type="submit">Search</button>
             </form>
             <a href="../view/restaurant.php">Go to Dashboard</a>
         </div>
-
     </header>
 
-    <!--The code for the featured recipes, with their picture, name, short description and rating-->
+    <!--The code for the restaurants section-->
     <section class="restaurants">
-        <h1>Featured Restaurants</h1>
-        
-
-        <div class="restaurants-section">
-            <div class="restaurants-card">
-                <img src ="../assets/images/elevate-RBuF5GfN8ts-unsplash.jpg" alt="Image of Bossman restaurant">
-                <h2>Bossman restaurant</h2>
-                <p>Dining with a touch of family</p>
-                <!--The code for how the stars are filled or colored-->
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span><!--The code for a filled or colored star-->
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span><!--The code for an empty or unfilled star-->
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-        
-            
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/elevate-vofmJUVScDE-unsplash.jpg" alt="Image of Penaky Diner">
-                <h2>Penaky Diner</h2>
-                <p>Dine with fresh blueberry wine</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-elevate-3009803.jpg" alt="Image of Friends of Friends">
-                <h2>Friends of Friends</h2>
-                <p>Best Pasta place with friends</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/shivani-g-bROdjExthjA-unsplash.jpg" alt="Image of Poky Pee">
-                <h2>Poky Pee</h2>
-                <p>A relaxing morning with the best breakfast</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-        
-        </div>
-
-        <!--The code for the breakfast options on the recipe page-->
         <h1>Explore restaurants</h1>
-        <div class="restaurants-section">
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-abdellah-ziki-1621531168-29473845.jpg" alt="Image of Asanka">
-                <h2>Asanka</h2>
-                <p>A taste of home</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-bertellifotografia-16674093.jpg" alt="Image of Hallmark">
-                <h2>Hallmark</h2>
-                <p>The first listening restaurant</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-            <div class="restaurants-card">
-                <img src ="../assets/images/pexels-pixabay-262978.jpg" alt="Image of munchies">
-                <h2>Munchies</h2>
-                <p>Always available</p>
-                <div class="rating-container">
-                    <div class="rating">
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9733;</span>
-                        <span>&#9734;</span>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="button">View</a>
-                    
-                </div>
-            </div>
-
-
+        <div id="restaurants-section" class="restaurants-section">
+            <!-- Restaurants will be dynamically populated here -->
         </div>
     </section>
 
@@ -185,74 +39,150 @@
         </div>
     </div>
 
-    
-
-
-
-
-
     <script>
-        function initializeModal() {
-            const modal = document.getElementById("restaurant-modal");
-            const modalImage = document.getElementById("modal-image");
-            const modalName = document.getElementById("modal-name");
-            const modalLocation = document.getElementById("modal-location");
-            const modalRating = document.getElementById("modal-rating");
-            const closeModal = document.querySelector(".close-btn");
+        document.addEventListener('DOMContentLoaded', function() {
+            const restaurantsSection = document.getElementById('restaurants-section');
+            const searchInput = document.getElementById('search-input');
 
-            // Data for restaurants
-            const restaurantData = {
-                bossmanrestaurant: {
-                    image: "../assets/images/elevate-RBuF5GfN8ts-unsplash.jpg",
-                    name: "Bossman Restaurant",
-                    location: "Accra, Ghana",
-                    rating: "⭐⭐⭐⭐☆",
-                },
+            // Fetch restaurants from the database
+            function fetchRestaurants() {
+                fetch('../actions/get_restaurants.php')
+                    .then(response => response.json())
+                    .then(restaurants => {
+                        // Clear existing restaurants
+                        restaurantsSection.innerHTML = '';
+
+                        // Populate restaurants
+                        restaurants.forEach(restaurant => {
+                            const restaurantCard = createRestaurantCard(restaurant);
+                            restaurantsSection.appendChild(restaurantCard);
+                        });
+
+                        // Re-initialize modal after adding new cards
+                        initializeModal();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching restaurants:', error);
+                        restaurantsSection.innerHTML = '<p>Error loading restaurants. Please try again later.</p>';
+                    });
+            }
+
+            // Create restaurant card dynamically
+            function createRestaurantCard(restaurant) {
+                const card = document.createElement('div');
+                card.className = 'restaurants-card';
                 
-                asanka: {
-                    image: "../assets/images/pexels-abdellah-ziki-1621531168-29473845.jpg",
-                    name: "Asanka",
-                    location: "Spintex, Ghana",
-                    rating: "⭐⭐⭐☆☆",
-                },
-            };
+                // Convert average rating to stars
+                const starRating = generateStarRating(parseFloat(restaurant.AverageRating));
 
-            // Add event listeners to "View" buttons
-            document.querySelectorAll(".button").forEach((button) => {
-                button.addEventListener("click", (event) => {
-                    if (button.textContent === "View") {
-                        const restaurantId = button.closest(".restaurants-card").querySelector("h2").textContent.toLowerCase().replace(/\s/g, '');
-                        const data = restaurantData[restaurantId];
+                card.innerHTML = `
+                    <img src="${restaurant.RestaurantImage || '../assets/images/default-restaurant.jpg'}" alt="Image of ${restaurant.ResName}">
+                    <h2>${restaurant.ResName}</h2>
+                    <p>${restaurant.AccessibilityFeatures || 'No specific accessibility info'}</p>
+                    <div class="rating-container">
+                        <div class="rating">
+                            ${starRating}
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a href="#" class="button" data-restaurant-id="${restaurant.RestaurantID}">View</a>
+                    </div>
+                `;
 
-                        if (data) {
-                            modalImage.src = data.image;
-                            modalName.textContent = data.name;
-                            modalLocation.textContent = `Location: ${data.location}`;
-                            modalRating.textContent = data.rating;
-                            modal.style.display = "flex";
-                        }
+                return card;
+            }
+
+            // Generate star rating HTML
+            function generateStarRating(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+                const emptyStars = 5 - fullStars - halfStar;
+
+                let starHtml = '';
+                
+                // Full stars
+                for (let i = 0; i < fullStars; i++) {
+                    starHtml += '<span>&#9733;</span>';
+                }
+                
+                // Half star
+                if (halfStar) {
+                    starHtml += '<span>&#9734;&#9733;</span>';
+                }
+                
+                // Empty stars
+                for (let i = 0; i < emptyStars; i++) {
+                    starHtml += '<span>&#9734;</span>';
+                }
+
+                return starHtml;
+            }
+
+            function initializeModal() {
+                const modal = document.getElementById("restaurant-modal");
+                const modalImage = document.getElementById("modal-image");
+                const modalName = document.getElementById("modal-name");
+                const modalLocation = document.getElementById("modal-location");
+                const modalRating = document.getElementById("modal-rating");
+                const closeModal = document.querySelector(".close-btn");
+
+                // Add event listeners to "View" buttons
+                document.querySelectorAll(".button").forEach((button) => {
+                    button.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const restaurantId = button.getAttribute('data-restaurant-id');
+
+                        // Fetch restaurant details
+                        fetch(`../view/get_restaurant_details.php?id=${restaurantId}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                modalImage.src = data.RestaurantImage;
+                                modalName.textContent = data.ResName;
+                                modalLocation.textContent = `Location: ${data.ResAddress}`;
+                                modalRating.innerHTML = generateStarRating(3); // You might want to pass actual rating here
+
+                                modal.style.display = "flex";
+                            })
+                            .catch(error => {
+                                console.error('Error fetching restaurant details:', error);
+                            });
+                    });
+                });
+
+                // Close modal
+                closeModal.addEventListener("click", () => {
+                    modal.style.display = "none";
+                });
+
+                // Close modal when clicking outside the content
+                window.addEventListener("click", (event) => {
+                    const modal = document.getElementById("restaurant-modal");
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            }
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.restaurants-card');
+                
+                cards.forEach(card => {
+                    const restaurantName = card.querySelector('h2').textContent.toLowerCase();
+                    const accessibilityInfo = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (restaurantName.includes(searchTerm) || accessibilityInfo.includes(searchTerm)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
                     }
                 });
             });
 
-            // Close modal
-            closeModal.addEventListener("click", () => {
-                modal.style.display = "none";
-            });
-
-            // Close modal when clicking outside the content
-            window.addEventListener("click", (event) => {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
-        }
-
-        // Initialize modal functionality
-        initializeModal();
-
-        
-
+            // Initial fetch of restaurants
+            fetchRestaurants();
+        });
     </script>
 </body>
 </html>
