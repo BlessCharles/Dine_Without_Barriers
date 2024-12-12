@@ -28,7 +28,10 @@ function getExploreRestaurants() {
 }
 
 
-
+// Fetch restaurants and return as JSON
+$restaurants = getExploreRestaurants();
+header('Content-Type: application/json');
+echo json_encode($restaurants);
 
 
 function getRestaurantDetails($restaurantId) {

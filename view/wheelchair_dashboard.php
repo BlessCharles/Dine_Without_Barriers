@@ -46,7 +46,12 @@
                     </div>
                 </div>
             </section>
+            <div class="link">
+                <a href="../view/wheelchair_user.php">Go to Restaurant page</a>
+            </div>
         </div>
+        
+        
     </div>
 
     <!-- Modals remain mostly the same, but we'll modify their content dynamically -->
@@ -89,7 +94,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Open User Profile modal and fetch user data
         document.getElementById('userProfileCard').addEventListener('click', function() {
-            fetch('../actions/get_user_profile.php')
+            fetch('../actions/get_user.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -172,12 +177,70 @@
 
         // Logout functionality
         document.getElementById('logoutBtn').addEventListener('click', function() {
-            // You'll need to create a logout.php script
-            fetch('../actions/logout.php')
-                .then(response => {
-                    // Redirect to login page
-                    window.location.href = '../view/login.php';
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '../actions/logout.php';
+            }
+        });
+
+        // Edit Profile Button - Create form directly in HTML
+        document.getElementById('editProfileBtn').addEventListener('click', function() {
+            fetch('../actions/get_user.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Create an edit profile form that matches your existing update script
+                        const editForm = `
+                            <div id="editProfileModal" class="modal" style="display:flex;">
+                                <div class="modal-content">
+                                    <h2>Edit Profile</h2>
+                                    <form action="../actions/update_profile.php" method="POST">
+                                        <input type="hidden" name="UserID" value="${data.UserID}">
+                                
+                                        <label for="FirstName">First Name:</label>
+                                        <input type="text" id="FirstName" name="FirstName" value="${data.firstName}" required>
+                                
+                                        <label for="LastName">Last Name:</label>
+                                        <input type="text" id="LastName" name="LastName" value="${data.lastName}" required>
+                                
+                                        <label for="Email">Email:</label>
+                                        <input type="email" id="Email" name="Email" value="${data.email}" required>
+                                
+                                        <label for="UserType">User Type:</label>
+                                        <select id="UserType" name="UserType" required>
+                                            <option value="WheelchairUser" ${data.userType === 'WheelchairUser' ? 'selected' : ''}>Wheelchair User</option>
+                                            <option value="Admin" ${data.userType === 'Admin' ? 'selected' : ''}>Admin</option>
+                                            <option value="Restaurant" ${data.userType === 'Restaurant' ? 'selected' : ''}>Restaurant</option>
+                                        </select>
+                                
+                                        <div class="button-container">
+                                            <button type="submit">Save Changes</button>
+                                            <button type="button" id="cancelEditProfile">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        `;
+                
+                        // Remove any existing edit modal and add new one
+                        const existingModal = document.getElementById('editProfileModal');
+                        if (existingModal) existingModal.remove();
+                
+                        document.body.insertAdjacentHTML('beforeend', editForm);
+                
+                        // Cancel button
+                        document.getElementById('cancelEditProfile').addEventListener('click', function() {
+                            document.getElementById('editProfileModal').remove();
+                        });
+                    }
                 });
+        });
+
+        // Delete Account Button
+        document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                // Directly navigate to delete script
+                window.location.href = '../actions/delete_profile.php';
+            }
         });
     });
     </script>

@@ -91,6 +91,9 @@ if ($hasRestaurantDetails) {
                     <h1 class="name">Dine Without Barriers</h1>
                 </div>
                 <div class="notification">
+                
+                    <a href="../view/restaurant_page.php">Go to Restaurant page</a>
+                
                     <img src="../assets/images/4850517_alert_bell_notification_ring_snooze_icon.png" alt="Notification Icon">
                 </div>
             </div>
@@ -128,6 +131,7 @@ if ($hasRestaurantDetails) {
                         <img src="../assets/images/1564507_checked_favorite_star_favourite_rating_icon.png" alt="Ratings Icon">
                     </div>
                 </div>
+                
             </section>
         </div>
     </div>
@@ -244,6 +248,14 @@ if ($hasRestaurantDetails) {
             const hasDetails = <?php echo $hasRestaurantDetails ? 'true' : 'false'; ?>;
             const restaurantManagementCard = document.getElementById('restaurantManagementCard');
 
+            // Debug: Log the initial state
+            console.log('Has Restaurant Details:', hasDetails);
+            console.log('Restaurant Management Card:', restaurantManagementCard);
+
+            
+
+            
+
             if (!hasDetails) {
                 restaurantManagementCard.style.backgroundColor = '#ffdddd';
                 restaurantManagementCard.style.border = '2px solid red';
@@ -251,31 +263,55 @@ if ($hasRestaurantDetails) {
                 restaurantManagementCard.querySelector('h3').style.color = 'red';
             }
 
+            // Check if cards exist
+            const restaurantProfileCard = document.getElementById('restaurantProfileCard');
+            const viewRatingsCard = document.getElementById('viewRatingsCard');
+
+            console.log('Restaurant Profile Card:', restaurantProfileCard);
+            
+            console.log('View Ratings Card:', viewRatingsCard);
+
             // Restaurant Profile Card Event Listener
-            document.getElementById('restaurantProfileCard').addEventListener('click', function() {
-                <?php if (!$hasRestaurantDetails): ?>
-                    alert('Please add restaurant details first.');
-                    openModal('restaurantManagementModal');
-                <?php else: ?>
-                    openModal('restaurantProfileModal');
-                <?php endif; ?>
-            });
+            if (restaurantProfileCard) {
+                restaurantProfileCard.addEventListener('click', function() {
+                    console.log('Restaurant Profile Card clicked');
+                    <?php if (!$hasRestaurantDetails): ?>
+                        alert('Please add restaurant details first.');
+                        openModal('restaurantManagementModal');
+                    <?php else: ?>
+                        openModal('restaurantProfileModal');
+                    <?php endif; ?>
+                });
+            } else {
+                console.error('Restaurant Profile Card not found');
+            }
 
             // Restaurant Management Card Event Listener
-            document.getElementById('restaurantManagementCard').addEventListener('click', function() {
-                openModal('restaurantManagementModal');
-            });
+            if (restaurantManagementCard) {
+                restaurantManagementCard.addEventListener('click', function() {
+                    console.log('Restaurant Management Card clicked');
+                    openModal('restaurantManagementModal');
+                });
+            } else {
+                console.error('Restaurant Management Card not found');
+            }
 
             // View Ratings Card Event Listener
-            document.getElementById('viewRatingsCard').addEventListener('click', function() {
-                openModal('viewRatingsModal');
-            });
+            if (viewRatingsCard) {
+                viewRatingsCard.addEventListener('click', function() {
+                    console.log('View Ratings Card clicked');
+                    openModal('viewRatingsModal');
+                });
+            } else {
+                console.error('View Ratings Card not found');
+            }
         });
 
         // Modal Functions
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
+                console.log('Opening modal:', modalId);
                 modal.style.display = 'flex';
             } else {
                 console.error('Modal not found: ' + modalId);
@@ -285,26 +321,27 @@ if ($hasRestaurantDetails) {
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
+                console.log('Closing modal:', modalId);
                 modal.style.display = 'none';
             } else {
                 console.error('Modal not found: ' + modalId);
             }
-        }
 
-        // Additional functions
-        function openEditProfileModal() {
-            closeModal('restaurantProfileModal');
-            openModal('editRestaurantProfileModal');
-        }
-
-        function deleteRestaurantAccount() {
-            if (confirm('Are you sure you want to delete your restaurant account? This action cannot be undone.')) {
-                window.location.href = '../actions/delete_restaurant.php';
+            // Additional functions
+            function openEditProfileModal() {
+                closeModal('restaurantProfileModal');
+                openModal('editRestaurantProfileModal');
             }
-        }
 
-        function logout() {
-            window.location.href = '../actions/logout.php';
+            function deleteRestaurantAccount() {
+                if (confirm('Are you sure you want to delete your restaurant account? This action cannot be undone.')) {
+                    window.location.href = '../actions/delete_restaurant.php';
+                }
+            }
+
+            function logout() {
+                window.location.href = '../actions/logout.php';
+            }
         }
 
         

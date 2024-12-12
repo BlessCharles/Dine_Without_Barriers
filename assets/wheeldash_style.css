@@ -119,6 +119,34 @@ body {
     background-color: rgb(197, 142, 70);
 }
 
+.content .link {
+    position: relative;
+    margin-top: 5vh;
+    min-height: 90vh;
+    background: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers items horizontally */
+}
+.link a{
+    display: inline-block;
+    background-color: forestgreen;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    justify-content: center;
+    
+
+}
+
+.content a:hover {
+    background-color:rgb(20, 85, 20);
+}
+
 /* Modal styling */
 .modal {
     display: none;
