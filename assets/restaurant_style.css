@@ -2,24 +2,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* General styling for the body content */
 body {
     min-height: 100vh;
-    background: #f9f9f9;
+    background: linear-gradient(135deg, #e6f2ff 0%, #b0d4f0 100%);
+    color: #2c3e50;
 }
 
-/* Container for the entire page */
 .container {
-    position: absolute;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Styling for the header section */
@@ -29,7 +27,7 @@ body {
     left: 0;
     width: 100vw;
     height: 10vh;
-    background: burlywood;
+    background: #3498db;
     display: flex;
     align-items: center;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
@@ -58,8 +56,8 @@ body {
 .branding .name {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
-    font-family:'Algerian';
+    color: white;
+    
 }
 
 /* Notification container */
@@ -81,7 +79,7 @@ body {
 .notification a {
     display: inline-block;
     background-color: forestgreen;
-    color: black; /* Use white text for better contrast */
+    color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -95,7 +93,6 @@ body {
     background-color: rgb(20, 85, 20);
 }
 
-
 /* Styling for the content section below the header */
 .content {
     margin-top: 10vh; /* Prevents content from being hidden behind the header */
@@ -106,171 +103,130 @@ body {
     height: 90vh;
 }
 
-/* The card container for different sections */
+/* Card Refinement */
 .cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
 }
 
-/* Styling for individual cards */
 .card {
-    background-color:burlywood;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;  /* Adjusted width to make the cards smaller */
-    height: 300px; /* Adjusted height */
-    padding: 20px;
+    background: linear-gradient(145deg, #64b5f6 0%, #1976d2 100%);
+    border-radius: 15px;
+    width: 270px;
+    height: 320px;
+    padding: 25px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
-/* Hover effect for cards */
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    background-color: rgb(197, 142, 70);
+    transform: scale(1.05) translateZ(20px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #2196f3 0%, #0d47a1 100%);
 }
 
-.card .box {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
+.card .box h3 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.card:hover .box h3 {
+    color: #e3f2fd;
 }
 
 .card .icon img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    margin-bottom: 15px; /* Adds some spacing between the icon and the text */
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1);
 }
 
-.cards .link {
-    position: relative;
-    margin-top: 5vh;
-    min-height: 90vh;
-    background: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* This centers items horizontally */
+.card:hover .icon img {
+    transform: scale(1.1) rotate(5deg);
 }
 
-
-
-/* Styling for modals */
+/* Modal Refinement */
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 60%;
+    background: linear-gradient(145deg, #f0f9ff 0%, #e6f2ff 100%);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    padding: 35px;
     max-width: 500px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
 }
 
 .modal-content h2 {
+    color: #1976d2;
+    margin-bottom: 25px;
     font-size: 24px;
-    margin-bottom: 20px;
 }
 
-/* Form inside restaurant management modal */
-#restaurantForm {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#restaurantForm label {
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-#restaurantForm input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#restaurantForm button {
-    padding: 10px;
-    font-size: 16px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s ease;
-}
-
-#restaurantForm button:hover {
-    background: #0056b3;
-}
-
-/* Modal buttons (close, edit, delete) */
+/* Button Refinement */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    background: linear-gradient(145deg, #2196f3 0%, #1976d2 100%);
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    background: #28a745;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 button:hover {
-    background: #218838;
+    background: linear-gradient(145deg, #1976d2 0%, #0d47a1 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Close button in modals */
-button:active {
-    background: #1e7e34;
-}
-
-/* Styling for tables in the Ratings modal */
-table {
+/* Form Input Refinement */
+.modal-content input {
     width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #64b5f6;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-table th, table td {
+.modal-content input:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 10px rgba(25, 118, 210, 0.2);
+}
+
+/* Ratings Table Refinement */
+.ratings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.ratings-table th, 
+.ratings-table td {
+    border: 1px solid #64b5f6;
     padding: 10px;
-    border: 1px solid #ddd;
     text-align: center;
 }
 
-table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
+.ratings-table th {
+    background-color: #e3f2fd;
+    color: #1976d2;
 }
-
-table td button {
-    background: #ffc107;
-    color: white;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-table td button:hover {
-    background: #e0a800;
-}
-

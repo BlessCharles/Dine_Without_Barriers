@@ -15,36 +15,39 @@ if (!isset($_SESSION['UserID'])) {
     exit;
 }
 
-// Get current user's ID
-$userId = $_SESSION['UserID'];
+// Get current restaurant's ID (assuming it's stored in session)
+$restaurantId = $_SESSION['UserID'];
 
-// Check if user has submitted restaurant details
+// Fetch restaurant details
 $restaurantQuery = "SELECT * FROM DWB_Restaurants WHERE UserID = ?";
 $restaurantStmt = $conn->prepare($restaurantQuery);
-$restaurantStmt->bind_param("i", $userId);
+$restaurantStmt->bind_param("i", $restaurantId);
 $restaurantStmt->execute();
 $restaurantResult = $restaurantStmt->get_result();
 $restaurantDetails = $restaurantResult->fetch_assoc();
+echo $restaurantId;
 
-// Determine if user has submitted details
-$hasRestaurantDetails = $restaurantResult->num_rows > 0;
+// Improved check for restaurant details
+$hasRestaurantDetails = $restaurantResult->num_rows > 0 && !empty($restaurantDetails['ResName']);
+//print_r($restaurantDetails);
 
-// Fetch ratings if restaurant exists
-$ratingsResult = null;
-if ($hasRestaurantDetails) {
-    $ratingsQuery = "SELECT u.FirstName, u.LastName, r.Rating
-                    FROM DWB_Ratings r
-                    JOIN DWB_Users u ON r.UserID = u.UserID
-                    WHERE r.RestaurantID = ?";
-    $ratingsStmt = $conn->prepare($ratingsQuery);
-    $ratingsStmt->bind_param("i", $restaurantDetails['RestaurantID']);
-    $ratingsStmt->execute();
-    $ratingsResult = $ratingsStmt->get_result();
-}
+// Fetch ratings for this restaurant
+$ratingsQuery = "SELECT u.FirstName, u.LastName, r.Rating
+                FROM DWB_Ratings r
+                JOIN DWB_Users u ON r.UserID = u.UserID
+                WHERE r.RestaurantID = ?";
+$ratingsStmt = $conn->prepare($ratingsQuery);
+$ratingsStmt->bind_param("i", $restaurantDetails['RestaurantID']);
+$ratingsStmt->execute();
+$ratingsResult = $ratingsStmt->get_result();
+$ratings = $ratingsResult->fetch_assoc();
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,16 +57,17 @@ if ($hasRestaurantDetails) {
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
             background-color: #fefefe;
             padding: 20px;
@@ -72,17 +76,33 @@ if ($hasRestaurantDetails) {
             max-width: 500px;
             text-align: center;
         }
-        .modal input, .modal button {
+
+        .modal input,
+        .modal button {
             margin: 10px 0;
             padding: 10px;
             width: 100%;
         }
+
+        .ratings-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ratings-table th,
+        .ratings-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .ratings-table th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
+
 <body>
-    
-    <!-- [Previous top navigation and cards section remains the same] -->
-    <!-- The code for the top navigation bar (where the search box and the notification icon is located) -->
     <div class="container">
         <header class="top-section">
             <div class="navigation">
@@ -99,10 +119,9 @@ if ($hasRestaurantDetails) {
             </div>
         </header>
 
-        <!-- Content section -->
+
         <div class="content">
             <section class="cards">
-                <!-- Restaurant Profile Card -->
                 <div class="card" id="restaurantProfileCard">
                     <div class="box">
                         <h3>Restaurant Profile</h3>
@@ -112,7 +131,6 @@ if ($hasRestaurantDetails) {
                     </div>
                 </div>
 
-                <!-- Restaurant Management Card -->
                 <div class="card" id="restaurantManagementCard">
                     <div class="box">
                         <h3>Add Restaurant Details</h3>
@@ -122,7 +140,6 @@ if ($hasRestaurantDetails) {
                     </div>
                 </div>
 
-                <!-- View Ratings Card -->
                 <div class="card" id="viewRatingsCard">
                     <div class="box">
                         <h3>View Ratings</h3>
@@ -131,21 +148,19 @@ if ($hasRestaurantDetails) {
                         <img src="../assets/images/1564507_checked_favorite_star_favourite_rating_icon.png" alt="Ratings Icon">
                     </div>
                 </div>
-                
             </section>
         </div>
     </div>
-
     <!-- Restaurant Profile Modal -->
     <div id="restaurantProfileModal" class="modal">
         <div class="modal-content">
-            <?php if ($hasRestaurantDetails): ?>
+            <?php if ($hasRestaurantDetails >= 1): ?>
                 <h2>Restaurant Profile</h2>
                 <p><strong>Restaurant Name:</strong> <?php echo htmlspecialchars($restaurantDetails['ResName']); ?></p>
                 <p><strong>Address:</strong> <?php echo htmlspecialchars($restaurantDetails['ResAddress']); ?></p>
                 <p><strong>Phone:</strong> <?php echo htmlspecialchars($restaurantDetails['PhoneNumber']); ?></p>
                 <p><strong>Accessibility Features:</strong> <?php echo htmlspecialchars($restaurantDetails['AccessibilityFeatures']); ?></p>
-                
+
                 <button onclick="openEditProfileModal()">Edit Profile</button>
                 <button onclick="deleteRestaurantAccount()">Delete Account</button>
             <?php else: ?>
@@ -153,7 +168,7 @@ if ($hasRestaurantDetails) {
                 <p>You haven't added any restaurant details yet.</p>
                 <p>Please use the "Add Restaurant Details" section to get started.</p>
             <?php endif; ?>
-            
+
             <button onclick="logout()">Logout</button>
             <button onclick="closeModal('restaurantProfileModal')">Close</button>
         </div>
@@ -166,50 +181,50 @@ if ($hasRestaurantDetails) {
             <form id="editRestaurantForm" action="../actions/update_restaurant.php" method="POST" enctype="multipart/form-data">
                 <label for="restaurantName">Restaurant Name:</label>
                 <input type="text" id="restaurantName" name="ResName"
-                    value="<?php echo htmlspecialchars($restaurantDetails['ResName']); ?>" required>
-                
+                    value="<?php echo $hasRestaurantDetails ? htmlspecialchars($restaurantDetails['ResName']) : ''; ?>" required>
+
                 <label for="restaurantAddress">Address:</label>
                 <input type="text" id="restaurantAddress" name="ResAddress"
-                    value="<?php echo htmlspecialchars($restaurantDetails['ResAddress']); ?>" required>
-                
+                    value="<?php echo $hasRestaurantDetails ? htmlspecialchars($restaurantDetails['ResAddress']) : ''; ?>" required>
+
                 <label for="restaurantPhone">Phone:</label>
                 <input type="text" id="restaurantPhone" name="PhoneNumber"
-                    value="<?php echo htmlspecialchars($restaurantDetails['PhoneNumber']); ?>" required>
+                    value="<?php echo $hasRestaurantDetails ? htmlspecialchars($restaurantDetails['PhoneNumber']) : ''; ?>" required>
 
                 <label for="restaurantFeatures">Accessibility Features:</label>
                 <input type="text" id="restaurantFeatures" name="AccessibilityFeatures"
-                    value="<?php echo htmlspecialchars($restaurantDetails['AccessibilityFeatures']); ?>" required>
-                
+                    value="<?php echo $hasRestaurantDetails ? htmlspecialchars($restaurantDetails['AccessibilityFeatures']) : ''; ?>" required>
+
                 <label for="restaurantImage">Restaurant Image:</label>
                 <input type="file" id="restaurantImage" name="restaurantImage" accept="image/*">
-                
+
                 <button type="submit">Update Profile</button>
                 <button type="button" onclick="closeModal('editRestaurantProfileModal')">Cancel</button>
             </form>
         </div>
     </div>
 
-    <!-- Restaurant Management Modal -->
+    <!-- Add/Manage Restaurant Details Modal -->
     <div id="restaurantManagementModal" class="modal">
         <div class="modal-content">
-            <h2>Add Restaurant Details</h2>
+            <h2>Add/Manage Restaurant Details</h2>
             <form id="restaurantForm" action="../actions/add_restaurant.php" method="POST" enctype="multipart/form-data">
                 <label for="restaurantName">Restaurant Name:</label>
                 <input type="text" id="restaurantName" name="ResName" placeholder="Enter Restaurant Name" required>
-                
+
                 <label for="restaurantAddress">Address:</label>
                 <input type="text" id="restaurantAddress" name="ResAddress" placeholder="Enter Address" required>
-                
+
                 <label for="restaurantPhone">Phone:</label>
                 <input type="text" id="restaurantPhone" name="PhoneNumber" placeholder="Enter Phone Number" required>
 
                 <label for="restaurantFeatures">Accessibility Features:</label>
                 <input type="text" id="restaurantFeatures" name="AccessibilityFeatures" placeholder="Enter Accessibility Features" required>
-                
+
                 <label for="restaurantImage">Restaurant Image:</label>
                 <input type="file" id="restaurantImage" name="restaurantImage" accept="image/*" required>
-                
-                <button type="submit">Submit Restaurant Details</button>
+
+                <button type="submit">Add Restaurant Details</button>
                 <button type="button" onclick="closeModal('restaurantManagementModal')">Close</button>
             </form>
         </div>
@@ -219,7 +234,7 @@ if ($hasRestaurantDetails) {
     <div id="viewRatingsModal" class="modal">
         <div class="modal-content">
             <h2>Restaurant Ratings</h2>
-            <table>
+            <table class="ratings-table">
                 <thead>
                     <tr>
                         <th>User</th>
@@ -228,13 +243,16 @@ if ($hasRestaurantDetails) {
                 </thead>
                 <tbody>
                     <?php
-                    while ($rating = $ratingsResult->fetch_assoc()) {
+                    if ($ratingsResult->num_rows > 0) {
+
                         // Convert numeric rating to star representation
-                        $starRating = str_repeat('⭐', $rating['Rating']);
+                        $starRating = str_repeat('⭐', $ratings['Rating']);
                         echo "<tr>
-                                <td>" . htmlspecialchars($rating['FirstName'] . ' ' . $rating['LastName']) . "</td>
-                                <td>$starRating</td>
-                            </tr>";
+                                    <td>" . htmlspecialchars($ratings['FirstName'] . ' ' . $ratings['LastName']) . "</td>
+                                    <td>$starRating</td>
+                                </tr>";
+                    } else {
+                        echo "<tr><td colspan='2'>No ratings yet</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -245,129 +263,75 @@ if ($hasRestaurantDetails) {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hasDetails = <?php echo $hasRestaurantDetails ? 'true' : 'false'; ?>;
+            const hasDetails = "<?php echo $hasRestaurantDetails ? 'true' : 'false'; ?>";
             const restaurantManagementCard = document.getElementById('restaurantManagementCard');
-
-            // Debug: Log the initial state
-            console.log('Has Restaurant Details:', hasDetails);
-            console.log('Restaurant Management Card:', restaurantManagementCard);
-
-            
-
-            
 
             if (!hasDetails) {
                 restaurantManagementCard.style.backgroundColor = '#ffdddd';
                 restaurantManagementCard.style.border = '2px solid red';
                 restaurantManagementCard.querySelector('h3').textContent = 'ADD RESTAURANT DETAILS (REQUIRED)';
                 restaurantManagementCard.querySelector('h3').style.color = 'red';
-            }
-
-            // Check if cards exist
-            const restaurantProfileCard = document.getElementById('restaurantProfileCard');
-            const viewRatingsCard = document.getElementById('viewRatingsCard');
-
-            console.log('Restaurant Profile Card:', restaurantProfileCard);
-            
-            console.log('View Ratings Card:', viewRatingsCard);
-
-            // Restaurant Profile Card Event Listener
-            if (restaurantProfileCard) {
-                restaurantProfileCard.addEventListener('click', function() {
-                    console.log('Restaurant Profile Card clicked');
-                    <?php if (!$hasRestaurantDetails): ?>
-                        alert('Please add restaurant details first.');
-                        openModal('restaurantManagementModal');
-                    <?php else: ?>
-                        openModal('restaurantProfileModal');
-                    <?php endif; ?>
-                });
             } else {
-                console.error('Restaurant Profile Card not found');
+                restaurantManagementCard.style.backgroundColor = '#d4edda'; // Light green color when details are available
+                restaurantManagementCard.style.border = '2px solid green';
+                restaurantManagementCard.querySelector('h3').textContent = 'Restaurant Details Added';
+                restaurantManagementCard.querySelector('h3').style.color = 'green';
             }
 
-            // Restaurant Management Card Event Listener
-            if (restaurantManagementCard) {
-                restaurantManagementCard.addEventListener('click', function() {
-                    console.log('Restaurant Management Card clicked');
-                    openModal('restaurantManagementModal');
-                });
-            } else {
-                console.error('Restaurant Management Card not found');
-            }
-
-            // View Ratings Card Event Listener
-            if (viewRatingsCard) {
-                viewRatingsCard.addEventListener('click', function() {
-                    console.log('View Ratings Card clicked');
-                    openModal('viewRatingsModal');
-                });
-            } else {
-                console.error('View Ratings Card not found');
-            }
         });
 
-        // Modal Functions
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                console.log('Opening modal:', modalId);
-                modal.style.display = 'flex';
+        document.getElementById('restaurantProfileCard').addEventListener('click', function() {
+            const hasDetails = "<?php echo $hasRestaurantDetails ? 'true' : 'false'; ?>";
+
+            if (!hasDetails) {
+                alert('Please add restaurant details first by clicking on "Add Restaurant Details".');
+
             } else {
-                console.error('Modal not found: ' + modalId);
+                openModal('restaurantProfileModal');
+
             }
+
+        });
+
+
+        function openEditProfileModal() {
+            closeModal('restaurantProfileModal');
+            openModal('editRestaurantProfileModal');
+        }
+
+        function deleteRestaurantAccount() {
+            if (confirm('Are you sure you want to delete your restaurant account? This action cannot be undone.')) {
+                window.location.href = '../actions/delete_restaurant.php';
+            }
+        }
+
+        function logout() {
+            window.location.href = '../actions/logout.php';
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
         }
 
         function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                console.log('Closing modal:', modalId);
-                modal.style.display = 'none';
-            } else {
-                console.error('Modal not found: ' + modalId);
-            }
-
-            // Additional functions
-            function openEditProfileModal() {
-                closeModal('restaurantProfileModal');
-                openModal('editRestaurantProfileModal');
-            }
-
-            function deleteRestaurantAccount() {
-                if (confirm('Are you sure you want to delete your restaurant account? This action cannot be undone.')) {
-                    window.location.href = '../actions/delete_restaurant.php';
-                }
-            }
-
-            function logout() {
-                window.location.href = '../actions/logout.php';
-            }
+            document.getElementById(modalId).style.display = 'none';
         }
 
-        
+        document.getElementById('restaurantManagementCard').addEventListener('click', function() {
+            openModal('restaurantManagementModal');
+        });
+
+        document.getElementById('viewRatingsCard').addEventListener('click', function() {
+            openModal('viewRatingsModal');
+        });
     </script>
 </body>
+
 </html>
 
 <?php
 // Close database connections
 $restaurantStmt->close();
-if ($hasRestaurantDetails) {
-    $ratingsStmt->close();
-}
+$ratingsStmt->close();
 $conn->close();
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,35 +2,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* General styling for the body content */
 body {
     min-height: 100vh;
-    background: #f9f9f9;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
 
 li {
     list-style: none;
 }
 
-/*The code to style the side bar where the navigation links to the other web pages can be found*/
+/* Sidebar Styling */
 .side-bar {
     position: fixed;
-    background: burlywood;
+    background: #3498db;
     width: 20vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-.side-bar p {
-    font-size: 16px;
+    backdrop-filter: blur(5px);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    
 }
 
 .side-bar .brand-name {
@@ -38,71 +37,72 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.side-bar .brand-name h3 {
+    
+    color: white;
+    font-size: 28px;
+    letter-spacing: 1px;
 }
 
 .side-bar li {
-    font-size: 24px;
-    padding: 10px 40px;
-    display: flex;
-    align-items: center;
+    transition: all 0.3s ease;
 }
 
-.side-bar li:hover {
-    background: whitesmoke;
-    color: black;
-}
-
-/* Style the anchor tags within the li (user and recipe management) */
 .side-bar li a {
-    text-decoration: none;
-    color: inherit;
     display: flex;
     align-items: center;
-    padding: 10px 40px;
+    padding: 15px 40px;
+    color: white;
+    font-size: 18px;
+    transition: all 0.3s ease;
 }
 
 .side-bar li a:hover {
-    background: whitesmoke;
+    background: rgba(255, 255, 255, 0.2);
     color: black;
 }
 
-/* Icon styling for both li and a tags */
-.side-bar img {
+.side-bar li a img {
     width: 100%;
-    max-width: 50px;
+    max-width: 40px;
     height: auto;
-    object-fit: cover;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
 }
 
-.side-bar h3{
-    font-family:'Algerian';
+
+
+.side-bar li a:hover img {
+    transform: scale(1.1);
 }
 
-/*The code for styling all the components in the container class*/
+/* Container Styling */
 .container {
     position: absolute;
     right: 0;
     width: 80vw;
     height: 100vh;
-    background: whitesmoke;
+    background: transparent;
 }
 
-/*The code for styling the top section or header of the page where the search box, submit button and notification icon can be found*/
 .container .top-section {
     position: fixed;
     top: 0;
     right: 0;
     width: 80vw;
     height: 10vh;
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
-    box-shadow:0 5px 8px burlywood;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
-    z-index: 1;
+    z-index: 5;
+    backdrop-filter: blur(5px);
 }
 
-/*The code for styling the top section and to ensure that there is space between the search box and the notification button*/
 .container .top-section .navigation {
     width: 100%;
     display: flex;
@@ -116,62 +116,161 @@ li {
 }
 
 .branding .logo {
-    height: 40px;
+    height: 45px;
     width: auto;
-    margin-right: 10px;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.branding .logo:hover {
+    transform: scale(1.1);
 }
 
 .branding .name {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
-    color: #333;
-    font-family:'Algerian';
+    color: #2c3e50;
+    
 }
 
-/* Notification icon */
 .notification {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 .notification img {
-    width: 30px;
+    width: 35px;
     height: auto;
     object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.container .content{
-    position:relative;
-    margin-top:10vh;
-    min-height:90vh;
-    background:whitesmoke;
+.notification img:hover {
+    transform: rotate(15deg);
 }
 
-/*The styling for the content on the cards*/
-.container .content .cards{
-    padding:20px 15px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
+/* Content Styling */
+.container .content {
+    position: relative;
+    margin-top: 10vh;
+    min-height: 90vh;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.container .content .cards .card{
-    width:250px;
-    height:150px;
-    background:white;
-    margin:20px 10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
-    box-shadow:0 5px 8px burlywood;
+.container .content .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
-.icon img{
-    width:100%;
-    max-width:50px;
-    height: auto;
-    object-fit:cover;
+.container .content .cards .card {
+    width: 250px;
+    height: 180px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(222, 184, 135, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .box h1 {
+    color: #3498db;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.card .box h3 {
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.card .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .icon img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .icon img {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1050px) {
+    .side-bar li {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 940px) {
+    .side-bar li span {
+        display: none;
+    }
+    .side-bar {
+        align-items: center;
+    }
+    .side-bar li img {
+        width: 40px;
+        height: 40px;
+    }
+    .side-bar li a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 38px;
+        border: 2px solid white;
+    }
+}
+
+@media screen and (max-width: 536px) {
+    .brand-name h3 {
+        font-size: 20px;
+    }
+    .side-bar li img {
+        width: 30px;
+        height: 30px;
+    }
 }

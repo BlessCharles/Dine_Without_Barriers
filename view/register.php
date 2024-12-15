@@ -8,69 +8,71 @@
 </head>
 
 <body>
-    <p class="title"><b>Register</b></p>
+    <div class="register-container">
+        <p class="title"><b>Register</b></p>
 
-    <form id="signupForm" action="../actions/register_user.php" method="POST" onsubmit="return validateForm()">
-        <!-- First name and last name in the same row -->
-        <div class="form-control form-control-row">
-            <div class="form-control">
-                <span class="icon">&#128100;</span>
-                <input type="text" id="firstname" name="firstname" placeholder="Enter your First name">
-                <div class="error" id="firstnameError"></div>
+        <form id="signupForm" action="../actions/register_user.php" method="POST" onsubmit="return validateForm()">
+            <!-- First name and last name in the same row -->
+            <div class="form-control form-control-row">
+                <div class="form-control">
+                    <span class="icon">&#128100;</span>
+                    <input type="text" id="firstname" name="firstname" placeholder="Enter your First name">
+                    <div class="error" id="firstnameError"></div>
+                </div>
+    
+                <div class="form-control">
+                    <span class="icon">&#128100;</span>
+                    <input type="text" id="lastname" name="lastname" placeholder="Enter your Last name">
+                    <div class="error" id="lastnameError"></div>
+                </div>
             </div>
     
+            <!-- Email on the next line -->
             <div class="form-control">
-                <span class="icon">&#128100;</span>
-                <input type="text" id="lastname" name="lastname" placeholder="Enter your Last name">
-                <div class="error" id="lastnameError"></div>
-            </div>
-        </div>
-    
-        <!-- Email on the next line -->
-        <div class="form-control">
-            <span class="icon">&#9993;</span>
-            <input type="email" id="email" placeholder="Enter your email" name="email">
-            <div class="error" id="emailError"></div>
-        </div>
-    
-        <!-- Password and confirm password on the same line -->
-        <div class="form-control form-control-row">
-            <div class="form-control">
-                <span class="icon">&#128274;</span>
-                <input type="password" id="password" placeholder="Enter your password" name="password">
-                <div class="error" id="passwordError"></div>
+                <span class="icon">&#9993;</span>
+                <input type="email" id="email" placeholder="Enter your email" name="email">
+                <div class="error" id="emailError"></div>
             </div>
     
-            <div class="form-control">
-                <span class="icon">&#128274;</span>
-                <input type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword">
-                <div class="error" id="confirmPasswordError"></div>
+            <!-- Password and confirm password on the same line -->
+            <div class="form-control form-control-row">
+                <div class="form-control">
+                    <span class="icon">&#128274;</span>
+                    <input type="password" id="password" placeholder="Enter your password" name="password">
+                    <div class="error" id="passwordError"></div>
+                </div>
+    
+                <div class="form-control">
+                    <span class="icon">&#128274;</span>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword">
+                    <div class="error" id="confirmPasswordError"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-control">
-            <label for="restaurantQuestion">Are you a restaurant?</label>
-            <select id="restaurantQuestion" name="restaurantQuestion" required onchange="toggleWheelchairQuestion()">
-                <option value="" disabled selected>Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
+            <div class="form-control">
+                <label for="restaurantQuestion">Are you a restaurant?</label>
+                <select id="restaurantQuestion" name="restaurantQuestion" required onchange="toggleWheelchairQuestion()">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
     
-        <!-- If the answer to restaurant is 'No', ask if the user is a wheelchair user -->
-        <div class="form-control" id="wheelchairQuestion" style="display: none;">
-            <label for="wheelchairUser">Are you a wheelchair user?</label>
-            <select id="wheelchairUser" name="wheelchairUser" onchange="toggleBackToRestaurant()">
-                <option value="" disabled selected>Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
+            <!-- If the answer to restaurant is 'No', ask if the user is a wheelchair user -->
+            <div class="form-control" id="wheelchairQuestion" style="display: none;">
+                <label for="wheelchairUser">Are you a wheelchair user?</label>
+                <select id="wheelchairUser" name="wheelchairUser" onchange="toggleBackToRestaurant()">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
     
-        <button type="submit" id="submitBtn"><b>Sign Up</b></button>
+            <button type="submit" id="submitBtn"><b>Sign Up</b></button>
     
-        <p class="login-link">Already have an account? <a href="../view/login.php">Log in</a></p>
-    </form>
+            <p class="login-link">Already have an account? <a href="../view/login.php">Log in</a></p>
+        </form>
+    </div>
     
 
     <script>

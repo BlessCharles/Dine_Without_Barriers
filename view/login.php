@@ -7,27 +7,29 @@
         <link rel="stylesheet" href="../assets/login_style.css">
     </head>
     <body>
-        <p class="title"><b>Login</b></p>
+        <div class="login-container">
+            <p class="title"><b>Login</b></p>
 
-        <form id="loginForm" action="../actions/login_user.php" method="POST" onsubmit="return formvalidate()">
-            <div class="form-control">
-                <span class="email-icon">&#9993;</span>
-                <input type="email" id="email" placeholder="Enter your email" name="email">
-                <p id="emailError" class="error"></p>
-            </div>
+            <form id="loginForm" action="../actions/login_user.php" method="POST" onsubmit="return formvalidate()">
+                <div class="form-control">
+                    <span class="email-icon">&#9993;</span>
+                    <input type="email" id="email" placeholder="Enter your email" name="email">
+                    <p id="emailError" class="error"></p>
+                </div>
 
-            <div class="form-control">
-                <span class="password-icon">&#128274;</span>
-                <input type="password" id="password" placeholder="Enter your password" name="password">
-                <p id="passwordError" class="error"></p>
-            </div>
+                <div class="form-control">
+                    <span class="password-icon">&#128274;</span>
+                    <input type="password" id="password" placeholder="Enter your password" name="password">
+                    <p id="passwordError" class="error"></p>
+                </div>
 
             
 
-            <button type="submit" class="login-button"><b>Log in</b></button>
+                <button type="submit" class="login-button"><b>Log in</b></button>
             
-            <p class="signup-text">Don't have an account? <a href="../view/register.php">Register</a></p>
-        </form>
+                <p class="signup-text">Don't have an account? <a href="../view/register.php">Register</a></p>
+            </form>
+        </div>
 
         <script>
         function formvalidate() {
