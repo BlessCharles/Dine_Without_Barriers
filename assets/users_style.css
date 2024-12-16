@@ -21,7 +21,7 @@ li {
     list-style: none;
 }
 
-/* Sidebar Styling */
+/*The code for styling the side bar*/
 .side-bar {
     position: fixed;
     background: #3498db; /* Primary blue color */
@@ -80,7 +80,7 @@ li {
     transform: scale(1.1);
 }
 
-/* Top Section Styling */
+/*The code for styling the top section of the page*/
 .top {
     width: 80vw;
     margin-left: 20vw;
@@ -108,7 +108,7 @@ li {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Table Section Styling */
+/*The code for styling the table on the page*/
 .table-section {
     margin-left: 20vw;
     width: 80vw;
@@ -143,13 +143,13 @@ tr:hover {
     background-color: rgba(52, 152, 219, 0.1);
 }
 
-/* Button Styling */
+/*The code for styling the buttons on the page*/
 table a.btn {
     padding: 8px 15px;
     margin-right: 5px;
     text-decoration: none;
     color: white;
-    background-color: #2980b9; /* Darker blue for buttons */
+    background-color: #2980b9;
     border-radius: 4px;
     font-weight: bold;
     transition: all 0.3s ease;
@@ -162,7 +162,7 @@ table a.btn:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Popup Styling */
+/*The code for styling the pop ups that appear on the page*/
 .popup {
     display: none;
     position: fixed;
@@ -208,10 +208,11 @@ table a.btn:hover {
     transform: translateY(-2px);
 }
 
+/*The code for styling the save button*/
 .save-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #2ecc71; /* Green for save */
+    background-color: #2ecc71;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -225,7 +226,7 @@ table a.btn:hover {
     transform: translateY(-2px);
 }
 
-/* Responsive Design */
+/*The code for the page responsiveness*/
 @media screen and (max-width: 1050px) {
     .side-bar li {
         font-size: 18px;

@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 function getExploreRestaurants() {
     global $conn;
     
-    // Get restaurants sorted by average rating
+    //The code to get restaurants sorted by average rating
     $sql = "SELECT r.RestaurantID, r.ResName, r.AccessibilityFeatures, r.RestaurantImage,
                 COALESCE(AVG(rt.Rating), 0) as AverageRating
             FROM DWB_Restaurants r
@@ -28,7 +28,7 @@ function getExploreRestaurants() {
 }
 
 
-// Fetch restaurants and return as JSON
+//The code to fetch restaurants and return as JSON
 $restaurants = getExploreRestaurants();
 header('Content-Type: application/json');
 echo json_encode($restaurants);
@@ -36,8 +36,9 @@ echo json_encode($restaurants);
 
 function getRestaurantDetails($restaurantId) {
     global $conn;
+    //The code to get the restaurant details from the database
     
-    $sql = "SELECT RestaurantID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage 
+    $sql = "SELECT RestaurantID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage
             FROM DWB_Restaurants
             WHERE RestaurantID = ?";
     $stmt = $conn->prepare($sql);
@@ -50,6 +51,7 @@ function getRestaurantDetails($restaurantId) {
 
 function saveRestaurantRating($restaurantId, $userId, $rating) {
     global $conn;
+    //The code to insert the ratings into the database
     
     $sql = "INSERT INTO DWB_Ratings (RestaurantID, UserID, Rating)
             VALUES (?, ?, ?)

@@ -9,16 +9,16 @@ ini_set('display_errors', 1);
 //The code to start session
 session_start();
 
-// Check if user is logged in
+// the code to check if user is logged in
 if (!isset($_SESSION['UserID'])) {
     header('Location: ../view/login.php');
     exit;
 }
 
-// Get current restaurant's ID (assuming it's stored in session)
+// the code to get current restaurant's ID
 $restaurantId = $_SESSION['UserID'];
 
-// Fetch restaurant details
+// the code to fetch restaurant details
 $restaurantQuery = "SELECT * FROM DWB_Restaurants WHERE UserID = ?";
 $restaurantStmt = $conn->prepare($restaurantQuery);
 $restaurantStmt->bind_param("i", $restaurantId);
@@ -27,11 +27,11 @@ $restaurantResult = $restaurantStmt->get_result();
 $restaurantDetails = $restaurantResult->fetch_assoc();
 echo $restaurantId;
 
-// Improved check for restaurant details
+
 $hasRestaurantDetails = $restaurantResult->num_rows > 0 && !empty($restaurantDetails['ResName']);
 //print_r($restaurantDetails);
 
-// Fetch ratings for this restaurant
+// the code to fetch ratings for this restaurant
 $ratingsQuery = "SELECT u.FirstName, u.LastName, r.Rating
                 FROM DWB_Ratings r
                 JOIN DWB_Users u ON r.UserID = u.UserID
@@ -120,6 +120,7 @@ $ratings = $ratingsResult->fetch_assoc();
         </header>
 
 
+        <!--The code for the cards that appear on the screen-->
         <div class="content">
             <section class="cards">
                 <div class="card" id="restaurantProfileCard">
@@ -151,7 +152,7 @@ $ratings = $ratingsResult->fetch_assoc();
             </section>
         </div>
     </div>
-    <!-- Restaurant Profile Modal -->
+    <!-- the code for the restaurant Profile Modal -->
     <div id="restaurantProfileModal" class="modal">
         <div class="modal-content">
             <?php if ($hasRestaurantDetails >= 1): ?>
@@ -169,12 +170,12 @@ $ratings = $ratingsResult->fetch_assoc();
                 <p>Please use the "Add Restaurant Details" section to get started.</p>
             <?php endif; ?>
 
-            <button onclick="logout()">Logout</button>
+            <button id="logoutBtn" >Logout</button>
             <button onclick="closeModal('restaurantProfileModal')">Close</button>
         </div>
     </div>
 
-    <!-- Edit Restaurant Profile Modal -->
+    <!-- the code for the edit Restaurant Profile Modal -->
     <div id="editRestaurantProfileModal" class="modal">
         <div class="modal-content">
             <h2>Edit Restaurant Profile</h2>
@@ -204,7 +205,7 @@ $ratings = $ratingsResult->fetch_assoc();
         </div>
     </div>
 
-    <!-- Add/Manage Restaurant Details Modal -->
+    <!-- the code for the add/Manage Restaurant Details Modal -->
     <div id="restaurantManagementModal" class="modal">
         <div class="modal-content">
             <h2>Add/Manage Restaurant Details</h2>
@@ -230,7 +231,7 @@ $ratings = $ratingsResult->fetch_assoc();
         </div>
     </div>
 
-    <!-- View Ratings Modal -->
+    <!--the code for the view Ratings Modal -->
     <div id="viewRatingsModal" class="modal">
         <div class="modal-content">
             <h2>Restaurant Ratings</h2>
@@ -245,7 +246,7 @@ $ratings = $ratingsResult->fetch_assoc();
                     <?php
                     if ($ratingsResult->num_rows > 0) {
 
-                        // Convert numeric rating to star representation
+                        // the code to convert numeric rating to star representation
                         $starRating = str_repeat('⭐', $ratings['Rating']);
                         echo "<tr>
                                     <td>" . htmlspecialchars($ratings['FirstName'] . ' ' . $ratings['LastName']) . "</td>
@@ -305,9 +306,12 @@ $ratings = $ratingsResult->fetch_assoc();
             }
         }
 
-        function logout() {
-            window.location.href = '../actions/logout.php';
-        }
+        //the code for the logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '../actions/logout.php';
+            }
+        });
 
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';

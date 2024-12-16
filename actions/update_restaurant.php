@@ -9,13 +9,13 @@ if (!isset($_SESSION['RestaurantID'])) {
 
 $restaurantId = $_SESSION['RestaurantID'];
 
-// Validate and process form data
+//The code to validate and process form data
 $restaurantName = $_POST['ResName'];
 $address = $_POST['ResAddress'];
 $phone = $_POST['PhoneNumber'];
 $features = $_POST['AccessibilityFeatures'];
 
-// Handle image upload
+//The code to handle image upload
 $imagePath = null;
 if (isset($_FILES['restaurantImage']) && $_FILES['restaurantImage']['error'] == 0) {
     $uploadDir = '../uploads/';
@@ -25,14 +25,14 @@ if (isset($_FILES['restaurantImage']) && $_FILES['restaurantImage']['error'] == 
     if (move_uploaded_file($_FILES['restaurantImage']['tmp_name'], $imagePath)) {
         // Image uploaded successfully
     } else {
-        // Handle upload error
+        //The code to handle upload error
         $_SESSION['error'] = "Failed to upload image";
         header('Location: ../view/restaurant.php');
         exit;
     }
 }
 
-// Prepare update query
+//The code to prepare update query
 $query = "UPDATE DWB_Restaurants SET
         ResName = ?,
         ResAddress = ?,
@@ -43,7 +43,7 @@ $query = "UPDATE DWB_Restaurants SET
 
 $stmt = $conn->prepare($query);
 
-// Bind parameters dynamically
+//The code to bind parameters dynamically
 if ($imagePath) {
     $stmt->bind_param("sssssi",
         $restaurantName,
@@ -63,11 +63,11 @@ if ($imagePath) {
     );
 }
 
-// Execute update
+
 if ($stmt->execute()) {
-    $_SESSION['success'] = "Restaurant profile updated successfully";
+    echo "Restaurant profile updated successfully";
 } else {
-    $_SESSION['error'] = "Failed to update restaurant profile";
+    echo "Failed to update restaurant profile";
 }
 
 $stmt->close();

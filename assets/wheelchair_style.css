@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,18 +6,18 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Body Styles */
+
 body {
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-/* Header Section */
+/*The code for styling the top section of the page*/
 .top {
     width: 100%;
     height: auto;
-    background: linear-gradient(rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.2)), 
+    background: linear-gradient(rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.2)),
                 url("../assets/images/Light\ Modern\ Textile\ Minimalism\ Desktop\ Wallpaper.png") no-repeat center center;
     background-size: cover;
     color: #2c3e50;
@@ -47,6 +47,7 @@ body {
     color: #34495e;
 }
 
+/*The code for styling the search box on the page*/
 .search-box {
     max-width: 550px;
     margin: 20px auto;
@@ -70,6 +71,7 @@ body {
     box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
 }
 
+/*The code for styling the search button on the page*/
 .search-box button {
     padding: 12px 20px;
     background-color: #3498db;
@@ -103,7 +105,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Restaurants Section */
+/*The code for styling the restaurants section of the page*/
 .restaurants {
     padding: 50px 0;
 }
@@ -123,6 +125,7 @@ body {
     margin: 0 auto;
 }
 
+/*The code for styling the restaurant cards on the page*/
 .restaurants-card {
     background: white;
     border-radius: 15px;
@@ -163,6 +166,7 @@ body {
     color: #34495e;
 }
 
+/*The code for styling the buttons*/
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -189,7 +193,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Modal Styles */
+/*The code for styling the modals that appear on the screen*/
 .modal {
     display: none;
     position: fixed;
@@ -233,6 +237,7 @@ body {
     color: #34495e;
 }
 
+/*The code for styling the close button*/
 .close-btn {
     position: absolute;
     top: 15px;
@@ -258,7 +263,7 @@ body {
     margin: 10px 0;
 }
 
-/* Rating Modal */
+/*The code for styling the ratings modal that appears*/
 #rateModal .rating-container {
     display: flex;
     justify-content: center;

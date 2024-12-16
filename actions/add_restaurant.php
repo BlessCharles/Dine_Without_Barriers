@@ -6,29 +6,33 @@ if (!isset($_SESSION['UserID'])) {
     header('Location: ../view/login.php');
     exit;
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Validate and process form data
+
+// The code to validate and process the form data
 $restaurantName = $_POST['ResName'];
 $address = $_POST['ResAddress'];
 $phone = $_POST['PhoneNumber'];
 $features = $_POST['AccessibilityFeatures'];
 $userId = $_SESSION['UserID'];
 
-// Handle image upload
+// The code to handle image upload
 $imagePath = null;
 if (isset($_FILES['restaurantImage']) && $_FILES['restaurantImage']['error'] == 0) {
-    $uploadDir = '../uploads/';
+    $uploadDir = '../../uploads/';
     $imageName = uniqid() . '_' . basename($_FILES['restaurantImage']['name']);
     $imagePath = $uploadDir . $imageName;
     
     if (!move_uploaded_file($_FILES['restaurantImage']['tmp_name'], $imagePath)) {
         $_SESSION['error'] = "Failed to upload image";
-        header('Location: ../view/restaurant.php');
+        echo 'failed image';
+
         exit;
     }
 }
 
-// Prepare insert query for pending restaurants table
+// The code to prepare, insert query for pending restaurants table
 $query = "INSERT INTO DWB_Restaurant_Pending
         (UserID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage)
         VALUES (?, ?, ?, ?, ?, ?)";
@@ -43,11 +47,11 @@ $stmt->bind_param("isssss",
     $imagePath
 );
 
-// Execute insert
+// The code for the execute message
 if ($stmt->execute()) {
-    $_SESSION['success'] = "Restaurant details submitted and awaiting admin approval";
+    echo "Restaurant details submitted and awaiting admin approval";
 } else {
-    $_SESSION['error'] = "Failed to submit restaurant details";
+    echo "Failed to submit restaurant details";
 }
 
 $stmt->close();

@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 function getExploreRestaurants() {
     global $conn;
     
-    // Get restaurants sorted by average rating
+    //The code to get restaurants sorted by average rating
     $sql = "SELECT r.RestaurantID, r.ResName, r.AccessibilityFeatures, r.RestaurantImage,
                 COALESCE(AVG(rt.Rating), 0) as AverageRating
             FROM DWB_Restaurants r
@@ -33,8 +33,9 @@ function getExploreRestaurants() {
 
 function getRestaurantDetails($restaurantId) {
     global $conn;
+    //The code to get the restaurant details
     
-    $sql = "SELECT RestaurantID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage 
+    $sql = "SELECT RestaurantID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage
             FROM DWB_Restaurants
             WHERE RestaurantID = ?";
     $stmt = $conn->prepare($sql);
@@ -47,6 +48,7 @@ function getRestaurantDetails($restaurantId) {
 
 function saveRestaurantRating($restaurantId, $userId, $rating) {
     global $conn;
+    //The code to save the ratings for the restaurant
     
     $sql = "INSERT INTO DWB_Ratings (RestaurantID, UserID, Rating)
             VALUES (?, ?, ?)

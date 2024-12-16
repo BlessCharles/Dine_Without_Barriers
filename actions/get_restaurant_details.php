@@ -5,13 +5,13 @@ require_once '../actions/get_restaurants.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if restaurant ID is provided
-if (isset($_GET['id'])) {  // Note: changed from 'RestaurantID' to 'id' to match the JavaScript fetch
+// The code to check if restaurant ID is provided
+if (isset($_GET['id'])) {
     $restaurantId = intval($_GET['id']);
     $restaurant = getRestaurantDetails($restaurantId);
     
     if ($restaurant) {
-        // Ensure all expected keys exist, even if they're null
+        //The code to ensure all the expected fields exist
         $safeRestaurant = [
             'RestaurantImage' => $restaurant['RestaurantImage'] ?? '../assets/images/default-restaurant.jpg',
             'ResName' => $restaurant['ResName'] ?? 'Restaurant Name Unavailable',
@@ -20,16 +20,16 @@ if (isset($_GET['id'])) {  // Note: changed from 'RestaurantID' to 'id' to match
             'AccessibilityFeatures' => $restaurant['AccessibilityFeatures'] ?? 'No accessibility information'
         ];
         
-        // Return restaurant details as JSON
+        //The code to return restaurant details as JSON
         header('Content-Type: application/json');
         echo json_encode($safeRestaurant);
     } else {
-        // Restaurant not found
+        
         http_response_code(404);
         echo json_encode(['error' => 'Restaurant not found']);
     }
 } else {
-    // No ID provided
+    
     http_response_code(400);
     echo json_encode(['error' => 'No restaurant ID provided']);
 }

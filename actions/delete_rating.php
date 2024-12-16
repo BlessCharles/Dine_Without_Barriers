@@ -2,7 +2,7 @@
 session_start();
 require_once '../db/config.php';
 
-// Ensure user is logged in
+// The code to ensure user is logged in
 if (!isset($_SESSION['UserID'])) {
     echo json_encode(['error' => 'User not logged in']);
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION['UserID'])) {
 
 $userId = $_SESSION['UserID'];
 
-// Get restaurant name from POST
+// The code to get restaurant name from POST
 if (!isset($_POST['restaurantName'])) {
     echo json_encode(['success' => false, 'message' => 'Missing restaurant name']);
     exit;
@@ -18,7 +18,7 @@ if (!isset($_POST['restaurantName'])) {
 
 $restaurantName = $_POST['restaurantName'];
 
-// Delete rating
+// The code to delete the rating
 $sql = "DELETE FROM DWB_Ratings
         WHERE UserID = ? AND RestaurantID = (
             SELECT RestaurantID FROM DWB_Restaurants WHERE ResName = ?

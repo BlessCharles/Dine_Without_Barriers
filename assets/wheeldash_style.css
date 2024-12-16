@@ -18,7 +18,7 @@ body {
     background: transparent;
 }
 
-/* Top Section Styling */
+/*The code for styling the top section and the container*/
 .container .top-section {
     position: fixed;
     top: 0;
@@ -41,6 +41,7 @@ body {
     justify-content: space-between;
 }
 
+/*The code for styling the brand name and logo*/
 .branding {
     display: flex;
     align-items: center;
@@ -64,6 +65,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
+/*The code for styling the notification button*/
 .notification {
     display: flex;
     align-items: center;
@@ -81,7 +83,7 @@ body {
     transform: rotate(15deg);
 }
 
-/* Content Styling */
+/*The code for styling the container and content*/
 .container .content {
     position: relative;
     margin-top: 10vh;
@@ -118,6 +120,7 @@ body {
     overflow: hidden;
 }
 
+/*The code for styling the cards on page*/
 .card::before {
     content: '';
     position: absolute;
@@ -190,7 +193,7 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Modal Styling */
+/*The code for styling the modals that appears on the page*/
 .modal {
     display: none;
     position: fixed;
@@ -214,6 +217,7 @@ body {
     max-width: 500px;
     width: 90%;
     position: relative;
+    /* display: none; */
 }
 
 .modal-content h2 {

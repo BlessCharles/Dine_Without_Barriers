@@ -2,7 +2,7 @@
 include '../db/config.php';
 session_start();
 
-// Check if user is admin (you'll need to implement admin role checking)
+// The code to check if user is admin
 if (!isset($_SESSION['UserID'])) {
     header('Location: ../view/login.php');
     exit;
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pendingId'])) {
     $pendingId = $_POST['pendingId'];
     
     if ($_POST['action'] == 'approve') {
-        // Fetch pending restaurant details
+        // The code to fetch the pending restaurant details from the database
         $stmt = $conn->prepare("SELECT * FROM DWB_Restaurant_Pending WHERE PendingID = ?");
         $stmt->bind_param("i", $pendingId);
         $stmt->execute();
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pendingId'])) {
         $restaurant = $result->fetch_assoc();
         
         if ($restaurant) {
-            // Insert into main restaurants table
+            // The code to insert the restaurant information into main restaurants table
             $insertStmt = $conn->prepare("INSERT INTO DWB_Restaurants
                 (UserID, ResName, ResAddress, PhoneNumber, AccessibilityFeatures, RestaurantImage)
                 VALUES (?, ?, ?, ?, ?, ?)");
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pendingId'])) {
             );
             
             if ($insertStmt->execute()) {
-                // Delete from pending table
+                // The code to remove the information from the restaurant pending table
                 $deleteStmt = $conn->prepare("DELETE FROM DWB_Restaurant_Pending WHERE PendingID = ?");
                 $deleteStmt->bind_param("i", $pendingId);
                 $deleteStmt->execute();
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pendingId'])) {
             }
         }
     } elseif ($_POST['action'] == 'disapprove') {
-        // Delete from pending table
+        //The code to delete the information from the pending table if disapproved
         $deleteStmt = $conn->prepare("DELETE FROM DWB_Restaurant_Pending WHERE PendingID = ?");
         $deleteStmt->bind_param("i", $pendingId);
         

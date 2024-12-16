@@ -1,22 +1,22 @@
 <?php
 require_once '../db/config.php';
 
-// Ensure user is logged in and has a valid user ID
+//The code to ensure user is logged in and has a valid user ID
 session_start();
-$userId = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : 1; // Default to 1 for this example
+$userId = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : 1;
 
-// Check if required parameters are set
+//The code to check if required parameters are set
 if (isset($_POST['RestaurantID']) && isset($_POST['Rating'])) {
     $restaurantId = intval($_POST['RestaurantID']);
     $rating = intval($_POST['Rating']);
 
-    // Validate rating is between 1 and 5
+    //The code to validate rating is between 1 and 5
     if ($rating < 1 || $rating > 5) {
         echo json_encode(['success' => false, 'message' => 'Invalid rating']);
         exit;
     }
 
-    // Prepare and execute the SQL statement
+    //The code to prepare and execute the SQL statement
     $sql = "INSERT INTO DWB_Ratings (RestaurantID, UserID, Rating)
             VALUES (?, ?, ?)
             ON DUPLICATE KEY UPDATE Rating = ?";

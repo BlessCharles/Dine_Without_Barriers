@@ -7,7 +7,7 @@ CREATE TABLE DWB_Users (
     LastName VARCHAR(50) NOT NULL,
     UserPassword VARCHAR(255) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
-    UserType ENUM('WheelchairUser', 'Restaurant') NOT NULL,
+    UserType ENUM('WheelchairUser', 'Restaurant','Admin') NOT NULL,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

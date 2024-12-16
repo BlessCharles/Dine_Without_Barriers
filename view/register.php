@@ -12,7 +12,7 @@
         <p class="title"><b>Register</b></p>
 
         <form id="signupForm" action="../actions/register_user.php" method="POST" onsubmit="return validateForm()">
-            <!-- First name and last name in the same row -->
+            <!-- The code for the register form-->
             <div class="form-control form-control-row">
                 <div class="form-control">
                     <span class="icon">&#128100;</span>
@@ -27,14 +27,14 @@
                 </div>
             </div>
     
-            <!-- Email on the next line -->
+            
             <div class="form-control">
                 <span class="icon">&#9993;</span>
                 <input type="email" id="email" placeholder="Enter your email" name="email">
                 <div class="error" id="emailError"></div>
             </div>
     
-            <!-- Password and confirm password on the same line -->
+            
             <div class="form-control form-control-row">
                 <div class="form-control">
                     <span class="icon">&#128274;</span>
@@ -58,7 +58,7 @@
                 </select>
             </div>
     
-            <!-- If the answer to restaurant is 'No', ask if the user is a wheelchair user -->
+            <!-- The code to seperate the usertypes by asking the questions in the form-->
             <div class="form-control" id="wheelchairQuestion" style="display: none;">
                 <label for="wheelchairUser">Are you a wheelchair user?</label>
                 <select id="wheelchairUser" name="wheelchairUser" onchange="toggleBackToRestaurant()">
@@ -84,22 +84,22 @@
         const passwordError = document.getElementById("passwordError");
         const successMessage = document.getElementById("successMessage");
 
-        // Clear previous messages
+        //The code to clear previous messages
         passwordError.innerHTML = "";
         if (successMessage) successMessage.textContent = "";
 
-        // Email pattern for Ashesi emails
+        //The code for the regex for ashesi email
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
-        // Email validation
+        // the code for email validation
         if (email === "") {
             errorMessages.push("Email is required!");
         } else if (!emailPattern.test(email)) {
             errorMessages.push("Invalid email format.");
         }
 
-        // Password validations
+        // the code for password validations
         if (password.length < 8) {
             errorMessages.push("Password must be at least 8 characters long!");
         }
@@ -113,12 +113,12 @@
             errorMessages.push("Password must contain at least one special character!");
         }
 
-        // Confirm password match
+        // the code to confirm password match
         if (password !== confirmPassword) {
             errorMessages.push("Passwords do not match.");
         }
 
-        // Show errors or success message
+        // the code to show errors or success message
         if (errorMessages.length > 0) {
             passwordError.innerHTML = errorMessages.join("<br>");
             return false;
@@ -132,12 +132,12 @@
             return true;
         }
     }
-    // Function to display the wheelchair user question if 'No' is selected for restaurant question
+    // the code for the function to display the wheelchair user question if 'No' is selected for restaurant question
     function toggleWheelchairQuestion() {
         const restaurantQuestion = document.getElementById("restaurantQuestion").value;
         const wheelchairQuestion = document.getElementById("wheelchairQuestion");
 
-        // If 'No' is selected for restaurant, show wheelchair question
+        // the code for the condition so if 'No' is selected for restaurant, show wheelchair question
         if (restaurantQuestion === "no") {
             wheelchairQuestion.style.display = "block";
         } else {
@@ -145,16 +145,16 @@
         }
     }
 
-    // Function to hide the wheelchair question and return to the restaurant question
+    // the code for the function to hide the wheelchair question and return to the restaurant question
     function toggleBackToRestaurant() {
         const wheelchairUser = document.getElementById("wheelchairUser").value;
         const wheelchairQuestion = document.getElementById("wheelchairQuestion");
         const restaurantQuestion = document.getElementById("restaurantQuestion");
 
-        // If 'No' is selected for wheelchair user, hide wheelchair question and reset to restaurant question
+        // If 'No' is selected for wheelchair user, the code to hide wheelchair question and reset to restaurant question
         if (wheelchairUser === "no") {
             wheelchairQuestion.style.display = "none";
-            restaurantQuestion.value = "no"; // Reset restaurant question to 'No'
+            restaurantQuestion.value = "no";
         }
     }
 

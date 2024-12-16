@@ -3,23 +3,23 @@ session_start();
 require_once '../db/config.php';
 require_once '../actions/get_restaurants.php';
 
-// Check if user is logged in
+// the code to check if user is logged in
 if (!isset($_SESSION['UserID'])) {
-    // Redirect to login page if not logged in
+    
     header("Location: ../view/login.php");
     exit();
 }
 
-// Get current user's first name from session or database
+// the code to get current user's first name from session or database
 $firstName = $_SESSION['FirstName'] ?? '';
 
-// Handle search functionality
+// the code to handle search functionality
 $searchResults = [];
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
     $searchTerm = trim($_GET['search']);
     
     if (!empty($searchTerm)) {
-        // Prepare SQL to search restaurants
+        // the code to prepare SQL to search restaurants
         $stmt = $conn->prepare("
             SELECT r.*,
             COALESCE(AVG(rt.Rating), 0) AS AverageRating
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
     }
 }
 
-// Get explore restaurants from database
+// the code to get explore restaurants from database
 $exploreRestaurants = getExploreRestaurants();
 ?>
 
@@ -64,13 +64,13 @@ $exploreRestaurants = getExploreRestaurants();
     <title>Wheelchair user page</title>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- the code for the header Section -->
     <header class="top">
         <div class="top-section">
             <h1>Welcome <?php echo htmlspecialchars($firstName); ?></h1>
             <p>You are a search away from inclusive dining!</p>
             
-            <!-- Search Form -->
+            <!-- the code for the search part-->
             <form action="" method="GET" class="search-box">
                 <input type="text" name="search" placeholder="Search for Restaurants"
                     value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
@@ -81,7 +81,7 @@ $exploreRestaurants = getExploreRestaurants();
         </div>
     </header>
 
-    <!-- Search Results Section -->
+    <!-- the code to get the search results-->
     <?php if (!empty($searchResults)): ?>
         <section class="search-results">
             <h2>Search Results</h2>
@@ -94,9 +94,9 @@ $exploreRestaurants = getExploreRestaurants();
                     <div class="rating-container">
                         <div class="rating">
                             <?php
-                            $rating = isset($restaurant['AverageRating']) && $restaurant['AverageRating'] !== null 
-                                ? round($restaurant['AverageRating']) 
-                                : 0; // Default to 0 if no rating
+                            $rating = isset($restaurant['AverageRating']) && $restaurant['AverageRating'] !== null
+                                ? round($restaurant['AverageRating'])
+                                : 0;
                         
                             for ($i = 1; $i <= 5; $i++) {
                                 echo $i <= $rating ? '&#9733;' : '&#9734;';
@@ -121,12 +121,12 @@ $exploreRestaurants = getExploreRestaurants();
     <section class="restaurants">
         
 
-        <!-- Explore Restaurants (now dynamically populated) -->
+        <!-- the code for the explore restaurants section-->
         <h1>Explore Restaurants</h1>
         <div class="restaurants-section" id="explore-restaurants">
             <?php foreach ($exploreRestaurants as $restaurant): ?>
             <div class="restaurants-card" data-restaurant-id="<?php echo $restaurant['RestaurantID']; ?>">
-                <img src="<?php echo htmlspecialchars($restaurant['RestaurantImage']); ?>" alt="Image of <?php echo htmlspecialchars($restaurant['ResName']); ?>">
+                <img src="../../uploads<?php echo htmlspecialchars($restaurant['RestaurantImage']); ?>" alt="Image of <?php echo htmlspecialchars($restaurant['ResName']); ?>">
                 <h2><?php echo htmlspecialchars($restaurant['ResName']); ?></h2>
                 <p><?php echo htmlspecialchars($restaurant['AccessibilityFeatures']); ?></p>
                 <div class="rating-container">
@@ -134,7 +134,7 @@ $exploreRestaurants = getExploreRestaurants();
                         <?php
                         $rating = isset($restaurant['AverageRating']) && $restaurant['AverageRating'] !== null
                             ? round($restaurant['AverageRating'])
-                            : 0; // Default to 0 if no rating
+                            : 0;
                 
                         for ($i = 1; $i <= 5; $i++) {
                             echo $i <= $rating ? '&#9733;' : '&#9734;';
@@ -151,7 +151,7 @@ $exploreRestaurants = getExploreRestaurants();
         </div>
     </section>
 
-    <!-- Restaurant Details Modal -->
+    <!-- the code for the restaurant Details Modal -->
     <div id="restaurant-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -164,7 +164,7 @@ $exploreRestaurants = getExploreRestaurants();
         </div>
     </div>
 
-    <!-- Rate Modal -->
+    <!-- the code for the rate Modal -->
     <div id="rateModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -186,7 +186,7 @@ $exploreRestaurants = getExploreRestaurants();
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // View Restaurant Details
+        // the code for the view Restaurant Details
         document.querySelectorAll('.view-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -208,7 +208,7 @@ $exploreRestaurants = getExploreRestaurants();
             });
         });
 
-        // Rate Restaurant
+        // the code for the rate Restaurant
         document.querySelectorAll('.rate-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -222,13 +222,13 @@ $exploreRestaurants = getExploreRestaurants();
                 const rateModal = document.getElementById('rateModal');
                 rateModal.style.display = 'block';
 
-                // Reset and setup star rating
+                // the code to reset and setup star rating
                 resetStars();
                 setupStarClickListeners();
             });
         });
 
-        // Save Rating
+        // the code to save Rating
         document.getElementById('saveRating').addEventListener('click', function() {
             const restaurantId = document.getElementById('rateModalRestaurantId').value;
             const filledStars = document.querySelectorAll('#ratingStars .star.filled').length;
@@ -247,7 +247,7 @@ $exploreRestaurants = getExploreRestaurants();
                         alert(`You rated this restaurant ${filledStars} stars!`);
                         closeModals();
                         
-                        // Optionally reload or update the page/ratings
+                        
                         location.reload();
                     } else {
                         alert('Failed to save rating.');
@@ -258,7 +258,7 @@ $exploreRestaurants = getExploreRestaurants();
             }
         });
 
-        // Star Rating Functions (keep existing star rating logic)
+        
         function resetStars() {
             document.querySelectorAll('#ratingStars .star').forEach((star) => {
                 star.classList.remove('filled');
@@ -271,10 +271,10 @@ $exploreRestaurants = getExploreRestaurants();
                 star.addEventListener('click', function() {
                     const value = parseInt(star.getAttribute('data-value'));
 
-                    // Reset all stars
+                    // the code to reset all stars
                     resetStars();
 
-                    // Fill stars up to the clicked one
+                    // the code to fill stars up to the clicked one
                     for (let i = 0; i < value; i++) {
                         const currentStar = document.querySelector(`#ratingStars .star[data-value="${i + 1}"]`);
                         currentStar.classList.add('filled');
@@ -284,10 +284,10 @@ $exploreRestaurants = getExploreRestaurants();
             });
         }
 
-        // Clear Rating
+        // the code to clear Rating
         document.getElementById('clearRating').addEventListener('click', resetStars);
 
-        // Close Modals
+        // the code to close Modals
         document.querySelectorAll('.close, .close-btn').forEach(closeBtn => {
             closeBtn.addEventListener('click', closeModals);
         });
@@ -297,7 +297,7 @@ $exploreRestaurants = getExploreRestaurants();
             document.getElementById('rateModal').style.display = 'none';
         }
 
-        // Close modal when clicking outside
+        // the code to close modal when clicking outside
         window.addEventListener('click', function(event) {
             const restaurantModal = document.getElementById('restaurant-modal');
             const rateModal = document.getElementById('rateModal');

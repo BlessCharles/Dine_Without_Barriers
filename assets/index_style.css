@@ -13,7 +13,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header Styling */
+/*The code for styling the header*/
 header {
     height: 70px;
     width: 100%;
@@ -24,6 +24,7 @@ header {
     z-index: 100;
 }
 
+/*The code for styling the container*/
 .container {
     width: 90%;
     max-width: 1200px;
@@ -34,7 +35,7 @@ header {
     height: 100%;
 }
 
-/* Navigation Styling */
+
 nav ul {
     display: flex;
     align-items: center;
@@ -45,7 +46,7 @@ nav ul li {
     margin-left: 20px;
 }
 
-/* Branding Section */
+/*The code for styling the brand name and logo*/
 .branding {
     display: flex;
     align-items: center;
@@ -63,7 +64,7 @@ nav ul li {
     color: #2c3e50;
 }
 
-/* Video Background Section */
+/*The code for the video background on the page*/
 .top {
     position: relative;
     width: 100%;
@@ -95,6 +96,7 @@ nav ul li {
     z-index: -1;
 }
 
+/*The code for the top section of the page*/
 .top-section {
     max-width: 800px;
     padding: 30px;
@@ -119,7 +121,7 @@ nav ul li {
     margin-right: auto;
 }
 
-/* Button Styling */
+/*The code for styling the buttons*/
 .button {
     display: inline-block;
     background-color: #3498db;
@@ -139,7 +141,7 @@ nav ul li {
     border-color: #3498db;
 }
 
-/* Footer Styling */
+/*The code for styling the footer on the page*/
 footer {
     background-color: #2c3e50;
     color: white;

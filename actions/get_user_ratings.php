@@ -2,7 +2,7 @@
 session_start();
 require_once '../db/config.php';
 
-// Ensure user is logged in
+//The code to ensure user is logged in
 if (!isset($_SESSION['UserID'])) {
     echo json_encode(['error' => 'User not logged in']);
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION['UserID'])) {
 
 $userId = $_SESSION['UserID'];
 
-// Fetch user ratings with restaurant names
+//The code to fetch user ratings with restaurant names
 $sql = "SELECT r.ResName, rt.Rating
         FROM DWB_Ratings rt
         JOIN DWB_Restaurants r ON rt.RestaurantID = r.RestaurantID

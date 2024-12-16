@@ -9,7 +9,7 @@
     <body>
         <div class="login-container">
             <p class="title"><b>Login</b></p>
-
+            <!--The code for the form for the login-->
             <form id="loginForm" action="../actions/login_user.php" method="POST" onsubmit="return formvalidate()">
                 <div class="form-control">
                     <span class="email-icon">&#9993;</span>
@@ -24,7 +24,7 @@
                 </div>
 
             
-
+                <!--The code for the log in button and sign up redirection-->
                 <button type="submit" class="login-button"><b>Log in</b></button>
             
                 <p class="signup-text">Don't have an account? <a href="../view/register.php">Register</a></p>
@@ -42,6 +42,7 @@
             passwordError.textContent = "";
             emailError.textContent = "";
 
+            //The code for email validation using regex
             var emailPattern = /^[a-zA-Z0-9._%+-]+@(ashesi\.edu\.gh|gmail\.com|yahoo\.com|outlook\.com)$/;
             if (email === "") {
                 errorMessages.push("Email is required!");
@@ -51,6 +52,7 @@
                 emailError.textContent = "Invalid email format";
             }
 
+            //the code for password validationusing regex
             if (password.length < 8) {
                 errorMessages.push("Password must be at least 8 characters!");
                 passwordError.textContent = "Password must be at least 8 characters!";

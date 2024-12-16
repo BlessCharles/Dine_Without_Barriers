@@ -50,7 +50,7 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
             <h3>DWB</h3>
         </div>
         <ul>
-            <!-- Dashboard with a link -->
+            <!-- The code for the dashboard with link-->
             <li>
                 <a href="../view/dashboard.php">
                     <img src="../assets/images/9055226_bxs_dashboard_icon.png">
@@ -58,7 +58,7 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
                 </a>
             </li>
     
-            <!-- User Management with a link -->
+            <!-- The code for the user Management with a link-->
             <li>
                 <a href="../view/users.php">
                     <img src="../assets/images/8665306_circle_user_icon.png">
@@ -66,7 +66,7 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
                 </a>
             </li>
     
-            <!-- Recipe Management with a link -->
+            <!--The code for the recipe Management with a link -->
             <li>
                 <a href="../view/restaurants_manage.php">
                     <img src="../assets/images/2639899_restaurant_icon.png">
@@ -84,9 +84,9 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
                     <img src="../assets/images/DIne_without_Barrirs-removebg-preview.png" alt="Dine Without Barriers Logo" class="logo">
                     <h1 class="name">Dine Without Barriers</h1>
                 </div>
-                <div class="notification">
+                <div id="logoutBtn" class="notification">
                     
-                    <a href="../actions/logout.php">Log out</a>
+                    <a  href="../actions/logout.php">Log out</a>
                 </div>
             </div>
         </header>
@@ -132,5 +132,13 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
             </section>
         </div>
     </div>
+    <script>
+        //The code for the logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '../actions/logout.php';
+            }
+        });
+    </script>
 </body>
 </html>

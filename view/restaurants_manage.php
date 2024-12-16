@@ -38,7 +38,7 @@ $result = $conn->query($query);
             <h3>DWB</h3>
         </div>
         <ul>
-            <!-- Dashboard with a link -->
+            <!-- the code for the dashboard with a link -->
             <li>
                 <a href="../view/dashboard.php">
                     <img src="../assets/images/9055226_bxs_dashboard_icon.png">
@@ -46,7 +46,7 @@ $result = $conn->query($query);
                 </a>
             </li>
     
-            <!-- User Management with a link -->
+            <!-- the code for the user Management with a link -->
             <li>
                 <a href="../view/users.php">
                     <img src="../assets/images/8665306_circle_user_icon.png">
@@ -54,7 +54,7 @@ $result = $conn->query($query);
                 </a>
             </li>
     
-            <!-- Recipe Management with a link -->
+            <!-- the code for the recipe Management with a link -->
             <li>
                 <a href="../view/restaurants_manage.php">
                     <img src="../assets/images/2639899_restaurant_icon.png">
@@ -71,7 +71,7 @@ $result = $conn->query($query);
         </div>
     </header>
 
-    <!--The code for the table section where a table with four columns can be found-->
+    <!--The code for the table section where a table with six columns can be found-->
     <section class="table-section">
         <table>
             <tr>
@@ -84,9 +84,9 @@ $result = $conn->query($query);
             </tr>
         
             <?php
-            // Check if pending restaurants exist
+            // the code to check if pending restaurants exist
             if ($result->num_rows > 0) {
-                // Loop through all pending restaurants and populate the table rows
+                // the code to loop through all pending restaurants and populate the table rows
                 while ($restaurant = $result->fetch_assoc()) {
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($restaurant['FirstName'] . ' ' . $restaurant['LastName']) . '</td>';
@@ -124,6 +124,6 @@ $result = $conn->query($query);
 </html>
 
 <?php
-// The code to close the database connection at the end
+
 $conn->close();
 ?>

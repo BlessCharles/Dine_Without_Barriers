@@ -9,6 +9,7 @@ body {
     padding: 0;
 }
 
+/*The code for styling the register container on the page*/
 .register-container {
     width: 100%;
     max-width: 500px;
@@ -32,13 +33,14 @@ body {
     width: 100%;
 }
 
+/*The code for styling the form on the page*/
 .form-control {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
 }
 
-/* Flexbox styling to display first name and last name on the same line */
+
 .form-control-row {
     display: flex;
     justify-content: space-between;
@@ -66,6 +68,7 @@ body {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/*The code for styling the icons in the input boxes*/
 .icon {
     position: absolute;
     right: 10px;
@@ -75,6 +78,7 @@ body {
     font-size: 20px;
 }
 
+/*The code for styling the error messages*/
 .error {
     color: #e74c3c;
     font-size: 14px;
@@ -109,6 +113,7 @@ body {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/*The code for styling the register button and login redirection*/
 #submitBtn {
     width: 100%;
     height: 50px;
@@ -146,6 +151,7 @@ body {
     text-decoration: underline;
 }
 
+/*The code for screen responsiveness*/
 @media screen and (max-width: 480px) {
     .register-container {
         width: 95%;
