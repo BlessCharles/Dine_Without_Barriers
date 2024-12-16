@@ -269,12 +269,12 @@ $ratings = $ratingsResult->fetch_assoc();
             if (!hasDetails) {
                 restaurantManagementCard.style.backgroundColor = '#ffdddd';
                 restaurantManagementCard.style.border = '2px solid red';
-                restaurantManagementCard.querySelector('h3').textContent = 'ADD RESTAURANT DETAILS (REQUIRED)';
+                //restaurantManagementCard.querySelector('h3').textContent = 'ADD RESTAURANT DETAILS (REQUIRED)';
                 restaurantManagementCard.querySelector('h3').style.color = 'red';
             } else {
-                restaurantManagementCard.style.backgroundColor = '#d4edda'; // Light green color when details are available
+                restaurantManagementCard.style.backgroundColor = '#d4edda';
                 restaurantManagementCard.style.border = '2px solid green';
-                restaurantManagementCard.querySelector('h3').textContent = 'Restaurant Details Added';
+                //restaurantManagementCard.querySelector('h3').textContent = 'Restaurant Details Added';
                 restaurantManagementCard.querySelector('h3').style.color = 'green';
             }
 
@@ -328,10 +328,3 @@ $ratings = $ratingsResult->fetch_assoc();
 </body>
 
 </html>
-
-<?php
-// Close database connections
-$restaurantStmt->close();
-$ratingsStmt->close();
-$conn->close();
-?>

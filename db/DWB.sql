@@ -1,6 +1,4 @@
-CREATE DATABASE DWB;
-
-USE DWB;
+USE webtech_fall2024_bless_oppong;
 
 -- Table to store users information
 CREATE TABLE DWB_Users (

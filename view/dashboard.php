@@ -85,7 +85,8 @@ $activeUsers = $activeUsersResult->fetch_row()[0];
                     <h1 class="name">Dine Without Barriers</h1>
                 </div>
                 <div class="notification">
-                    <img src="../assets/images/4850517_alert_bell_notification_ring_snooze_icon.png" alt="Notification Icon">
+                    
+                    <a href="../actions/logout.php">Log out</a>
                 </div>
             </div>
         </header>

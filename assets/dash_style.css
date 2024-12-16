@@ -138,16 +138,24 @@ li {
     align-items: center;
 }
 
-.notification img {
-    width: 35px;
-    height: auto;
-    object-fit: cover;
+
+
+/* Notification button */
+.notification a {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
     cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-.notification img:hover {
-    transform: rotate(15deg);
+.notification a:hover {
+    background-color: #1484cf;
 }
 
 /* Content Styling */
